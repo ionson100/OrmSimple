@@ -372,7 +372,7 @@ namespace ExampleOrmMySql
 
         [MapColumnNameAttribute("`datet`")]
         public DateTime Datet { get; set; }
-        public void ErrorDal(Telephone currentObject, string message)
+        public void ErrorDal(Telephone currentObject, Exception exception)
         {
             throw new NotImplementedException();
         }
