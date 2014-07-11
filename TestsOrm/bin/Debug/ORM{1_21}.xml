@@ -1,0 +1,1323 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ORM{1_21}</name>
+    </assembly>
+    <members>
+        <member name="T:ORM_1_21_.AttributesOfClass`1">
+            <summary>
+            Служебный класс для генерации  данных рефлексии бывшего табличного класса
+            </summary>
+            <typeparam name="T">Тип  класса</typeparam>
+        </member>
+        <member name="T:ORM_1_21_.Attribute.BaseAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.BaseAttribute.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="columnName"></param>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.BaseAttribute.ColumnName">
+            <summary>
+            Название колонки в таблице  базы
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.BaseAttribute.PropertyName">
+            <summary>
+            Название проперти которое соответствует данной
+            колонке в таблице, в классе сущности
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Attribute.MapForeignKeyAttribute">
+            <summary>
+            Обозначает поля для связи  для наследования и выборки по join
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapForeignKeyAttribute.ColumnName">
+            <summary>
+            Название поля в таблице базы
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapForeignKeyAttribute.PropertyName">
+            <summary>
+            Название проперти в объекте
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Attribute.MapBaseKeyAttribute">
+            <summary>
+            Атрибут поля для левой таблицы ( бозовой) для наследования выборка по Join
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapBaseKeyAttribute.ColumnName">
+            <summary>
+            Название поля в таблице базы
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapBaseKeyAttribute.PropertyName">
+            <summary>
+            Название проперти в объекте
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Attribute.MapTableJoinAttribute">
+            <summary>
+             атрибут для джойн выборки наследуемых классов
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.MapTableJoinAttribute.#ctor(System.String)">
+            <summary>
+            Инициализация атрибута, для типа который наследует другой тип сущности, выборка Join
+            </summary>
+            <param name="typeJoin">тип join</param>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapTableJoinAttribute.TypeJoin">
+            <summary>
+             тип join
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Attribute.MapTableNameAttribute">
+            <summary>
+            Атрибут для навешивания названия таблици на класс сущности.
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.MapTableNameAttribute.#ctor(System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="tableName">Название таблицы в базе данных</param>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.MapTableNameAttribute.#ctor(System.String,System.Boolean)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="tableName">Название таблицы в базе</param>
+            <param name="usageCache"> Помешать ли результат запроса в кеш второго уровня</param>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.MapTableNameAttribute.#ctor(System.String,System.String)">
+            <summary>
+             Конструктор Определяет название таблицы, условие для всех выборок
+            </summary>
+            <param name="tableName">Название таблици в базе данных</param>
+            <param name="sqlWhere">добавление критериея запроса по where пример: "id='1'"</param>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.MapTableNameAttribute.#ctor(System.String,System.String,System.Boolean)">
+            <summary>
+            Определяет название таблицы, условие для всех выборок, ключь запись в кеш второго уровня
+            </summary>
+            <param name="tableName">Название таблицы в базе данных</param>
+            <param name="sqlWhere">добавление критериея запроса по where пример: "id='1'"</param>
+            <param name="usageCache">Помешать ли результат запроса в кеш второго уровня</param>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapTableNameAttribute.TableName">
+            <summary>
+            Название таблицы в базе данных
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapTableNameAttribute.SqlWhere">
+            <summary>
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapTableNameAttribute.UsageCache">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Cache`1">
+            <summary>
+            Класс обертка для словаря кеша
+            </summary>
+            <typeparam name="T">Тип кешируемых объектов</typeparam>
+        </member>
+        <member name="T:ORM_1_21_.Configure">
+            <summary>
+            Класс для конфигурации
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Configure.GetSessionCore">
+            <summary>
+            Получение сессии
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:ORM_1_21_.Configure.ActivateLogger(System.String)">
+            <summary>
+            Конструктор по умолчанию, для его использования, должен быть и заполнен, конфиг файл приложения
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Configure.#ctor(System.String,ORM_1_21_.ProviderName,System.Boolean,System.String,System.Boolean)">
+             <summary>
+             Конструктор для ввода данных из программы, минуя конфиг
+             </summary>
+             <param name="connectionString">Строка соединения с базой</param>
+             <param name="provider">Провайдер соединения с базой</param>
+             <param name="writeLog">ключ для записи в лог файл</param>
+             <param name="logFileName">Путь и название файла, куда будем писать логи</param>
+            <param name="usageCache">Использование кеша второго уровня</param>
+        </member>
+        <member name="M:ORM_1_21_.Configure.WriteLogFile(System.String)">
+            <summary>
+            Запись в лог файл при наличии разрешения на запись при  создании конфигуре, и  определения файла, куда писать.
+            </summary>
+            <param name="message">текст записи</param>
+        </member>
+        <member name="M:ORM_1_21_.Configure.ErrorForStatic``1(System.Exception,System.String)">
+            <summary>
+            Выкидывание сообщения в IErrorDal
+            </summary>
+            <typeparam name="T">Тип где произошло исключение</typeparam>
+            <param name="ex">текст ошибки</param>
+            <param name="methodName">метод, где произошло исключение</param>
+        </member>
+        <member name="T:ORM_1_21_.ExceptionOrm">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.ExceptionOrm.#ctor(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="errorMessage"></param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:ORM_1_21_.ExceptionOrm.#ctor(System.String,System.Exception)">
+            <summary>
+            
+            </summary>
+            <param name="errorMessage"></param>
+            <param> <name></name> </param>
+            <param name="exception"> </param>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="P:ORM_1_21_.ExceptionOrm.ExceptionCore">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Linq.ExpressionVisitor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Linq.ExpressionVisitor.Visit(System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.ExpressionVisitor.VisitUnary(System.Linq.Expressions.UnaryExpression)">
+            <summary>
+            
+            </summary>
+            <param name="unaryExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.ExpressionVisitor.VisitBinary(System.Linq.Expressions.BinaryExpression)">
+            <summary>
+            
+            </summary>
+            <param name="binaryExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.ExpressionVisitor.VisitConstant(System.Linq.Expressions.ConstantExpression)">
+            <summary>
+            
+            </summary>
+            <param name="constantExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.ExpressionVisitor.VisitMemberAccess(System.Linq.Expressions.MemberExpression)">
+            <summary>
+            
+            </summary>
+            <param name="memberExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)">
+            <summary>
+            
+            </summary>
+            <param name="methodCallExpression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.ExpressionVisitor.VisitExpressionList(System.Collections.ObjectModel.ReadOnlyCollection{System.Linq.Expressions.Expression})">
+            <summary>
+            
+            </summary>
+            <param name="original"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.ExpressionVisitor.VisitNew(System.Linq.Expressions.NewExpression)">
+            <summary>
+            
+            </summary>
+            <param name="nex"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ORM_1_21_.Parameter">
+            <summary>
+            Еденица параметра, для запроса с параметрами
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Parameter.#ctor(System.String,System.Object)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="name">Имя парметра</param>
+            <param name="value">Имя парметра</param>
+        </member>
+        <member name="P:ORM_1_21_.Parameter.Name">
+            <summary>
+            Имя парметра
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Parameter.Value">
+            <summary>
+            Значение пераметра
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.ParameterStoredPr">
+            <summary>
+            Еденица параметра, для запроса с параметрами
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.ParameterStoredPr.#ctor(System.String,System.Object,System.Data.ParameterDirection,System.String)">
+            <summary>
+            Ctor
+            </summary>
+            <param name="name">Имя парметра</param>
+            <param name="value">Имя парметра</param>
+            <param name="direction"></param>
+            <param name="sourceColumn"></param>
+        </member>
+        <member name="P:ORM_1_21_.ParameterStoredPr.SourceColumn">
+            <summary>
+            Название колонки таблици
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.ParameterStoredPr.Name">
+            <summary>
+            Имя парметра
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.ParameterStoredPr.Value">
+            <summary>
+            Значение пераметра
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.ProviderName">
+            <summary>
+            Type providers for databse
+            </summary>
+        </member>
+        <member name="F:ORM_1_21_.ProviderName.MsSql">
+            <summary>
+            </summary>
+        </member>
+        <member name="F:ORM_1_21_.ProviderName.MySql">
+            <summary>
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Helper">
+            <summary>
+            Расширения для построения запроса
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Helper.SaveOrUpdate``1(System.Linq.IQueryable{``0},``0)">
+            <summary>
+            Сохранение или добавление объекта в базу
+            </summary>
+            <param name="coll"></param>
+            <param name="obj"></param>
+            <typeparam name="T">сохраняемый или добавляемый обект в базу</typeparam>
+        </member>
+        <member name="M:ORM_1_21_.Helper.DistinctCore``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            
+            </summary>
+            <param name="coll"></param>
+            <param name="exp"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.GroupByCore``2(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Группировка по полю
+            </summary>
+            <param name="coll"></param>
+            <param name="key"></param>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.GroupByCore``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Группировка по полю с  условием ключа.
+            </summary>
+            <param name="coll"></param>
+            <param name="exp"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.GroupByCore``2(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
+            <summary>
+            Группировка по полю с  анoнимным выбором
+            </summary>
+            <param name="coll"></param>
+            <param name="key"></param>
+            <param name="exp"></param>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TKey"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Delete``1(System.Linq.IQueryable{``0},``0)">
+            <summary>
+            Удаление объекта по  по соответствию
+            </summary>
+            <param name="coll"></param>
+            <param name="obj">Удаляемы объект, он должен быть получен из базы</param>
+            <typeparam name="T">Тип проекции таблицы</typeparam>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Delete``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Удаление обьекта по параметрам
+            </summary>
+            <param name="coll"></param>
+            <param name="exp">передикат на удаление</param>
+            <typeparam name="T">Тип проекции таблицы</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Limit``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
+            <summary>
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            </summary>
+            <param name="coll"></param>
+            <param name="start">Начало позиции</param>
+            <param name="length">Количество записей</param>
+            <typeparam name="T">Тип проекции таблицы</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Limit(System.Linq.IQueryable{System.Decimal},System.Int32,System.Int32)">
+            <summary>
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            </summary>
+            <param name="coll"></param>
+            <param name="start">Начало позиции</param>
+            <param name="length">Количество записей</param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Limit(System.Linq.IQueryable{System.Single},System.Int32,System.Int32)">
+            <summary>
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            </summary>
+            <param name="coll"></param>
+            <param name="start">Начало позиции</param>
+            <param name="length">Количество записей</param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Limit(System.Linq.IQueryable{System.Int32},System.Int32,System.Int32)">
+            <summary>
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            </summary>
+            <param name="coll"></param>
+            <param name="start">Начало позиции</param>
+            <param name="length">Количество записей</param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Limit(System.Linq.IQueryable{System.Int16},System.Int32,System.Int32)">
+            <summary>
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            </summary>
+            <param name="coll"></param>
+            <param name="start">Начало позиции</param>
+            <param name="length">Количество записей</param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Limit(System.Linq.IQueryable{System.Int64},System.Int32,System.Int32)">
+            <summary>
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            </summary>
+            <param name="coll"></param>
+            <param name="start">Начало позиции</param>
+            <param name="length">Количество записей</param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Limit(System.Linq.IQueryable{System.Object},System.Int32,System.Int32)">
+            <summary>
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            </summary>
+            <param name="coll"></param>
+            <param name="start">Начало позиции</param>
+            <param name="length">Количество записей</param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Limit(System.Linq.IQueryable{System.Double},System.Int32,System.Int32)">
+            <summary>
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            </summary>
+            <param name="coll"></param>
+            <param name="start">Начало позиции</param>
+            <param name="length">Количество записей</param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Get``1(System.Linq.IQueryable{``0},System.Object)">
+            <summary>
+            Вытаскивание обьекта по ключу
+            </summary>
+            <param name="coll"></param>
+            <param name="keyValue">Значение первичного ключа</param>
+            <typeparam name="T">Тип проекции таблицы</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.GetImage(System.Byte[])">
+            <summary>
+            Преобразование массива байт в картинку
+            </summary>
+            <param name="coll"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Split``1(System.Collections.Generic.IEnumerable{``0},System.Int32)">
+            <summary>
+            Разбиение на массивы
+            </summary>
+            <param name="source"></param>
+            <param name="chunkLength">количество массивов</param>
+            <typeparam name="T">Тип проекции таблицы</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.SplitCore``1(System.Linq.IQueryable{``0},System.Int32)">
+            <summary>
+            разбиение на массивы
+            </summary>
+            <param name="coll"></param>
+            <param name="chunkLength">количество массивов</param>
+            <typeparam name="T">Тип проекции таблицы</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.WhereFindLikeStartsWith``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Выполнение произвольного запроса из  валидной строки, резултат итема колекции должен быть T
+            </summary>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+            <summary>
+            Поиск LIKE 'cc%'
+            </summary>
+            <param name="coll"></param>
+            <param name="exp"></param>
+            <typeparam name="T">Тип проекции таблицы</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.WhereFindLikeContains``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Поиск LIKE '%cc%'
+            </summary>
+            <param name="coll"></param>
+            <param name="exp"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.WhereFindLikeEndsWith``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
+            <summary>
+            Поиск LIKE '%cc'
+            </summary>
+            <param name="coll"></param>
+            <param name="exp"></param>
+            <typeparam name="T">Тип проекции таблицы</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Update``3(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.Dictionary{``1,``2}}})">
+            <summary>
+            Обновление таблицы без вытаскивания данных на клиента
+            </summary>
+            <param name="coll"></param>
+            <param name="parametr">Словарь поле - значение</param>
+            <typeparam name="T">Тип проекции таблицы</typeparam>
+            <typeparam name="TKey"></typeparam>
+            <typeparam name="TValue"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.OverCache``1(System.Linq.IQueryable{``0})">
+            <summary>
+            Получение данных минуя кеш
+            </summary>
+            <param name="coll"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.Join``5(System.Linq.IQueryable{``0},System.Linq.IQueryable{``4},System.Linq.Expressions.Expression{System.Func{``0,``1}},System.Linq.Expressions.Expression{System.Func{``4,``2}},System.Linq.Expressions.Expression{System.Func{``0,``4,``3}})">
+            <summary>
+            
+            </summary>
+            <param name="coll"></param>
+            <param name="coll1"></param>
+            <param name="key1"></param>
+            <param name="key2"></param>
+            <param name="newObject"></param>
+            <typeparam name="TOuter"></typeparam>
+            <typeparam name="TInner"></typeparam>
+            <typeparam name="TInnerKey"></typeparam>
+            <typeparam name="TOuterKey"></typeparam>
+            <typeparam name="TResult"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.FreeSql``1(ORM_1_21_.ISession,System.String)">
+            <summary>
+            Выполенение произвольного запроса без параметров
+            </summary>
+            <param name="ses">ISession</param>
+            <param name="sql">Запрос</param>
+            <typeparam name="TResult">Тип единицы Результата</typeparam>
+            <returns>IEnumerableTResult</returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.FreeSqlParam``1(ORM_1_21_.ISession,System.String,ORM_1_21_.Parameter[])">
+            <summary>
+            Выполенение произвольного запроса с параметрами
+            </summary>
+            <param name="ses">ISession</param>
+            <param name="sql">Запрос</param>
+            <param name="par">Параметры запроса</param>
+            <typeparam name="TResult">Тип единицы Результата</typeparam>
+            <returns>IEnumerableTResult</returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.ProcedureCall``1(ORM_1_21_.ISession,System.String)">
+            <summary>
+            Вызов хранимой процедуры
+            </summary>
+            <param name="ses">ISession</param>
+            <param name="sql">Текст запроса</param>
+            <typeparam name="TResult">Тип результата</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Helper.ProcedureCallParam``1(ORM_1_21_.ISession,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.String,ORM_1_21_.ParameterStoredPr[])">
+            <summary>
+            Вызов хранимой процедуры с параметрами
+            </summary>
+            <param name="ses">ISession</param>
+            <param name="parout"></param>
+            <param name="sql">Текст процедуры</param>
+            <param name="par">Праметры</param>
+            <typeparam name="TResult">Тип еденицы результата</typeparam>
+            <returns></returns>
+        </member>
+        <member name="T:ORM_1_21_.IActionsForCollection">
+            <summary>
+            Интерфес для работы с объектом, из листа
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Generator">
+            <summary>
+            Тип генератора первичного ключа таблици
+            </summary>
+        </member>
+        <member name="F:ORM_1_21_.Generator.Native">
+            <summary>
+            автоикремент
+            </summary>
+        </member>
+        <member name="F:ORM_1_21_.Generator.Assigned">
+            <summary>
+            Назначаемый пользователем
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Attribute.MapPrimaryKeyAttribute">
+            <summary>
+            Атрибут для указания первичного ключа для таблицы
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.MapPrimaryKeyAttribute.#ctor(System.String,ORM_1_21_.Generator)">
+            <summary>
+            Аттрибут первичного ключа
+            </summary>
+            <param name="columnName">Название поля</param>
+            <param name="generator">Тип генерации зачения на ключ, native-автоинремент,assigned-назначенный в рукопашную</param>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.MapPrimaryKeyAttribute.DbType">
+            <summary>
+            Тип поля в базе данных
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapPrimaryKeyAttribute.ColumnNameForReder">
+            <summary>
+            Название колонки первичного для райвуку
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapPrimaryKeyAttribute.TypeColumn">
+            <summary>
+            Тип колонки первичного ключа
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapPrimaryKeyAttribute.Generator">
+            <summary>
+            Тип генератора первичного ключа в базе
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Attribute.MapCustomTypeAttribute">
+            <summary>
+            Тип сериализуемый в поле таблицы
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Attribute.MapColumnNameAttribute">
+            <summary>
+            Атрибуты для класса слоя, определяют название  колонки в таблице
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.MapColumnNameAttribute.#ctor(System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="nameColumnTable">Название колонки в таблице  базы</param>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.MapColumnNameAttribute.#ctor(System.String,System.Int32)">
+            <summary>
+            
+            </summary>
+            <param name="nameColumnTable"></param>
+            <param name="maxLength"></param>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.MapColumnNameAttribute.DbType">
+            <summary>
+            Тип поля в базе данных
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapColumnNameAttribute.TypeColumn">
+            <summary>
+            Тип колонки в таблице базы
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapColumnNameAttribute.ColumnNameForReader">
+            <summary>
+            Для выборки результатов
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.MapColumnNameAttribute.MaxLength">
+            <summary>
+            Максимальная длина для символьных полей
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Attribute.CurrentTableAtribute">
+            <summary>
+            Атрибут для класса слоя, определяет тип и название колонки только при транформацию листа в таблицу
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Attribute.CurrentTableAtribute.#ctor(System.Type,System.String)">
+            <summary>
+            Конструктор
+            </summary>
+            <param name="type">Тип колонки в создаваемой таблице</param>
+            <param name="nameColumn">Название колонки в создаваемой таблице</param>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.CurrentTableAtribute.GetTypeColumn">
+            <summary>
+            Тип колонки в создаваемой таблице
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Attribute.CurrentTableAtribute.GetNameColumn">
+            <summary>
+            Название колонки в создаваемой таблице
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.IActionDal`1">
+            <summary>
+            Сервисный интерфейс для обслуживания базы.Для своевременного действия, с работой  в базе
+            отнаследуйте свой табличный тип от этого интерфейса, и можете контролировать в отбработчиках
+            интерфейса, все этапы работы с базой
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ORM_1_21_.IActionDal`1.BeforeInsert(`0)">
+            <summary>
+            Перед вставкой
+            </summary>
+            <param name="item">обьект вставки</param>
+        </member>
+        <member name="M:ORM_1_21_.IActionDal`1.AfterInsert(`0)">
+            <summary>
+            После вставки
+            </summary>
+            <param name="item">обьект вставки</param>
+        </member>
+        <member name="M:ORM_1_21_.IActionDal`1.BeforeUpdate(`0)">
+            <summary>
+            Перед обновлением
+            </summary>
+            <param name="item">объект обновления</param>
+        </member>
+        <member name="M:ORM_1_21_.IActionDal`1.AfterUpdate(`0)">
+            <summary>
+            После обновления
+            </summary>
+            <param name="item">обьект обновления</param>
+        </member>
+        <member name="M:ORM_1_21_.IActionDal`1.BeforeDelete(`0)">
+            <summary>
+            Перед удалением
+            </summary>
+            <param name="item"> объект удаления</param>
+        </member>
+        <member name="M:ORM_1_21_.IActionDal`1.AfterDelete(`0)">
+            <summary>
+            Полсле удаления
+            </summary>
+            <param name="item">обьект после удаления, фантом.</param>
+        </member>
+        <member name="T:ORM_1_21_.IErrorDal`1">
+            <summary>
+            отлов ощибки в обьекте табличного класса, для отлова, отнаследуйте  табличный класс от этого интерфейса
+            и смотрите в обработчике причины исключения
+            </summary>
+            <typeparam name="T">тип где происходит исключение, метод где возникло исключение</typeparam>
+        </member>
+        <member name="M:ORM_1_21_.IErrorDal`1.ErrorDal(`0,System.String)">
+            <summary>
+            </summary>
+            <param name="currentObject"></param>
+            <param name="metod"></param>
+            <param name="messageError"></param>
+        </member>
+        <member name="T:ORM_1_21_.ISession">
+            <summary>
+            Основной рабочий тип
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetList``1(System.String)">
+            <summary>
+            Возвращает лист оъектов  табличной сущности
+            </summary>
+            <typeparam name="T">Тип класса сущности</typeparam>
+            <param name="sqlWhere">Запрос на выборку начиная с Where, Where включительно
+            для полной выборки можно указать "" или NULL</param>
+            <returns>Лист оьектов сущности</returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetList``1">
+            <summary>
+              Возвращает лист оъектов  табличной сущности
+            </summary>
+            <typeparam name="T">Тип класса сущности</typeparam>
+            <returns>Лист оьектов сущности</returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetList``1(System.String,System.Boolean)">
+            <summary>
+             Возвращает лист оъектов  табличной сущности
+            </summary>
+             <param name="sqlWhere">Запрос на выборку  включительно
+             для полной выборки можно указать "" или NULL</param>
+            <param name="isUsingCache">оверкеш</param>
+            <typeparam name="T"></typeparam>
+            <returns>Лист оьектов сущности</returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetListParam``1(System.String,System.Object[])">
+            <summary>
+             запрос на выборку с параметрами
+            </summary>
+            <param name="sqlWhere">запрос на выборку, начиная с where  с праметрами</param>
+            <param name="obj">список параметров в той последовательности в которой они идут в запросе.</param>
+            <typeparam name="T">Тип сущности</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetListParam``1(System.Boolean,System.String,System.Object[])">
+            <summary>
+             запрос на выборку с параметрами и ключем для фиксации запроса в глобальном кеше
+            </summary>
+            <param name="isUsingCache">оверкеш</param>
+            <param name="sqlWhere">запрос на выборку, начиная с where  с праметрами</param>
+            <param name="obj">список параметров в той последовательности в которой они идут в запросе.</param>
+            <typeparam name="T">тип табличной сущьности</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.Save``1(``0)">
+            <summary>
+            Сохранение обьекта в базе равно как вставка и изменение
+            </summary>
+            <typeparam name="T">Тип обьекта</typeparam>
+            <param name="item">сохраняемый объект</param>
+        </member>
+        <member name="M:ORM_1_21_.ISession.Delete``1(``0)">
+            <summary>
+            Удаление объекта из базы
+            </summary>
+            <typeparam name="T">Тип удаляемого объекта</typeparam>
+            <param name="item">Удаляемый объект</param>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetListFromClassProprty``1(System.String)">
+            <summary>
+            Получение листа объекта из базы
+            </summary>
+            <typeparam name="T">Тип объекта</typeparam>
+            <param name="sqlWhereForClassProprtyName">Запрос на выборку, вместо полей базы, можно указывать поля класса, для таблицы базы
+            программа сама поменяет их на название колонок таблицы базы</param>
+            <returns>Лист объектов базы</returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.ClearCache``1">
+            <summary>
+            Очистка кеша удаляются вся информаия о типе из глобального кеша, и чистится кеш сесии
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.ISession.BeginTransaction">
+            <summary>
+            Получение объекта ITransaction с одновременно началом трансакции
+            </summary>
+            <returns>ITransaction</returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.BeginTransaction(System.Data.IsolationLevel)">
+            <summary>
+             Получение объекта ITransaction с одновременно началом трансакции, с параметрами
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.Get``1(System.Object)">
+            <summary>
+            Получение объекта по первичному ключу
+            </summary>
+            <typeparam name="T">Тип объекта</typeparam>
+            <param name="id">Значение первичного ключа</param>
+            <returns>Полученый объект, в случае отсутствия  в базe - NULL</returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetList``1(``0,System.String,System.Boolean)">
+            <summary>
+            Получение  списка сущностей, по объекту как модели
+            </summary>
+            <param name="obj">модель</param>
+            <param name="sqlWhere">запрос</param>
+            <param name="isUsingCache">оверкеш</param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.Querion``1">
+            <summary>
+            Выборка через Linq
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.IsPersistent(System.Object)">
+            <summary>
+            Из базы ли обьект
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.ToPersistent(System.Object)">
+            <summary>
+            Делаем объект персистентным
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:ORM_1_21_.ISession.WriteLogFile(System.String)">
+            <summary>
+            Запись в лог
+            </summary>
+            <param name="message">сообщение</param>
+        </member>
+        <member name="P:ORM_1_21_.ISession.IsDispose">
+            <summary>
+              is enter Dispose?
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Linq.QueryProvider">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Linq.QueryProvider.GetQueryText(System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.QueryProvider.Execute``1(System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <param name="singl"></param>
+            <typeparam name="TS"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.QueryProvider.Execute(System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
+            <returns></returns>
+        </member>
+        <member name="T:ORM_1_21_.Linq.Query`1">
+            <summary>
+            
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ORM_1_21_.Linq.Query`1.#ctor(ORM_1_21_.Linq.QueryProvider)">
+            <summary>
+            
+            </summary>
+            <param name="provider"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:ORM_1_21_.Linq.Query`1.#ctor(ORM_1_21_.Linq.QueryProvider,System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="provider"></param>
+            <param name="expression"></param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:ORM_1_21_.Linq.Query`1.GetEnumerator">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.Query`1.ToString">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.Query`1.GetTypeQuery">
+            <summary>
+            Тип T
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ORM_1_21_.Properties.Resources">
+            <summary>
+              Класс ресурса со строгой типизацией для поиска локализованных строк и т.д.
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Properties.Resources.ResourceManager">
+            <summary>
+              Возвращает кэшированный экземпляр ResourceManager, использованный этим классом.
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Properties.Resources.Culture">
+            <summary>
+              Перезаписывает свойство CurrentUICulture текущего потока для всех
+              обращений к ресурсу с помощью этого класса ресурса со строгой типизацией.
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.Properties.Resources.SQL">
+             <summary>
+               Ищет локализованную строку, похожую на &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+            &lt;SQL&gt;
+              &lt;MSSql pref=&quot;SELECT IDENT_CURRENT (&apos;{1}&apos;);&quot; prefparam=&quot;@&quot;/&gt;
+              &lt;MySql pref=&quot;;SELECT LAST_INSERT_ID()&quot; prefparam=&quot;?&quot;/&gt;
+            &lt;/SQL&gt;
+            .
+             </summary>
+        </member>
+        <member name="T:ORM_1_21_.Sessione">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.GetList``1(System.String)">
+            <summary>
+            Возвращает лист объектов  табличной сущности
+            </summary>
+            <typeparam name="T">Тип класа сущности</typeparam>
+            <param name="sqlWhere">Запрос на выборку начиная с Where, Where включительно
+            для полной выборки можно указать "" или NULL</param>
+            <returns>Лист оьектов сущности</returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.Delete``1(``0)">
+            <summary>
+            Удаление объекта из базы
+            </summary>
+            <typeparam name="T">Тип удаляемого объекта</typeparam>
+            <param name="item">Удаляемый объект</param>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.GetListFromClassProprty``1(System.String)">
+            <summary>
+            Получение листа объекта из базы
+            </summary>
+            <typeparam name="T">Тип объекта</typeparam>
+            <param name="sqlWhereForClassProprtyName">Запрос на выборку, вместо полей базы, можно указывать поля класса, для таблицы базы
+            программа сама поменяет их на название колонок таблицы базы</param>
+            <returns>Лист объектов базы</returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.Save``1(``0)">
+            <summary>
+            Сохранение обьекта в базе равно как вставка и изменение
+            </summary>
+            <typeparam name="T">Тип обьекта</typeparam>
+            <param name="item">сохраняемый объект</param>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.Get``1(System.Object)">
+            <summary>
+            Получение объекта по первичному ключу
+            </summary>
+            <typeparam name="T">Тип объекта</typeparam>
+            <param name="id">Значение первичного ключа</param>
+            <returns>Полученый объект, в случае отсутствия  в базe - NULL</returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.GetReal``1(System.Object)">
+            <summary>
+            </summary>
+            <param name="id"></param>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.GetListParam``1(System.String,System.Object[])">
+            <summary>
+             запрос на выборку с параметрами
+            </summary>
+            <param name="sqlWhere">запрос на выборку, начиная с where  с праметрами</param>
+            <param name="obj">список параметров в той последовательности в которой они идут в запросе.</param>
+            <typeparam name="T">Тип сущности</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.GetList``1">
+            <summary>
+              Возвращает лист оъектов  табличной сущности
+            </summary>
+            <typeparam name="T">Тип класса сущности</typeparam>
+            <returns>Лист оьектов сущности</returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.GetList``1(System.String,System.Boolean)">
+            <summary>
+             Возвращает лист оъектов  табличной сущности
+            </summary>
+             <param name="sqlWhere">Запрос на выборку начиная с Where, Where включительно
+             для полной выборки можно указать "" или NULL</param>
+            <param name="isCache">Кешировать ли запрос , если используется кеш 2 level</param>
+            <typeparam name="T"></typeparam>
+            <returns>Лист оьектов сущности</returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.GetListParam``1(System.Boolean,System.String,System.Object[])">
+            <summary>
+             запрос на выборку с параметрами и ключем для фиксации запроса в кеше 
+            </summary>
+            <param name="isUsingCache">using cache  level-2</param>
+            <param name="sqlWhere">запрос на выборку, начиная с where  с праметрами</param>
+            <param name="obj">список параметров в той последовательности в которой они идут в запросе.</param>
+            <typeparam name="T">тип табличной сущьности</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.GetList``1(``0,System.String,System.Boolean)">
+            <summary>
+            Получения списка прототипов объекта
+            </summary>
+            <param name="obj">прототип</param>
+            <param name="sqlWhere">запрос Where включительно</param>
+            <param name="isCache">использование кеша</param>
+            <returns></returns>
+            <exception cref="T:System.Exception"></exception>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.Querion``1">
+            <summary>
+            Получения выражения ling to SQL
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.#ctor(System.String,System.Boolean,System.Boolean)">
+             <summary>
+             Конструктор 
+             </summary>
+             <param name="connectionString">Строка соединения с базой</param>
+             <param name="writeLog">ключ для записи в лог файл</param>
+            <param name="usageCache">Использование кеша</param>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.BeginTransaction">
+            <summary>
+            Получение объекта ITransaction с одновременно началом трансакции
+            </summary>
+            <returns>ITransaction</returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.BeginTransaction(System.Data.IsolationLevel)">
+            <summary>
+             Получение объекта ITransaction с одновременно началом трансакции
+            </summary>
+            <param name="value">Уровни изоляции</param>
+            <returns>ITransaction</returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.ClearCache``1">
+            <summary>
+            Очистка кеша второго уровня
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.Dispose">
+            <summary>
+             Овобождение ресурсов
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.Finalize">
+            <summary>
+            Позволяет объекту <see cref="T:System.Object"/> попытаться освободить ресурсы и выполнить другие операции очистки, перед тем как объект 
+            <see cref="T:System.Object"/> будет утилизирован в процессе сборки мусора.
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.WriteLogFile(System.String)">
+            <summary>
+            Запись в лог файл
+            </summary>
+            <param name="message">текст ошибки</param>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.IsPersistent(System.Object)">
+            <summary>
+            Определяет, откуда объект
+            </summary>
+            <param name="obj"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Sessione.ToPersistent(System.Object)">
+            <summary>
+            Пометить обьект, что он получен из базы
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="T:ORM_1_21_.Transaction.ITransaction">
+            <summary>
+            Интерфейс, для работы с трансакциаями
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Transaction.ITransaction.Commit">
+            <summary>
+            Завершить трансакцию
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Transaction.ITransaction.Rollback">
+            <summary>
+            Откатить трасакцию
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.IValidateDal`1">
+             <summary>
+            Проверка вводимых данных, для проверки отнаследуйте свой табличный класс от этого интерфейса
+            и проверяйте данные перед модификацией в таблице.
+             </summary>
+             <typeparam name="T">Тип вашего табличного класса</typeparam>
+        </member>
+        <member name="M:ORM_1_21_.IValidateDal`1.Validate(`0)">
+            <summary>
+            Проверка вводимых данных, для проверки отнаследуйте свой табличный класс от этого интерфейса
+            </summary>
+            <param name="type"></param>
+        </member>
+        <member name="T:ORM_1_21_.Transaction.Transactionale">
+            <summary>
+            Тип контейнер,содержит данные для трансакции,
+            занятость трансакции, фабрику для транакций
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.Utils">
+            <summary>
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Utils.ObjectToByteArray(System.Object)">
+            <summary>
+            Сериализация  объекта
+            </summary>
+            <param name="obj">Объект</param>
+            <returns>byte[]</returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.ByteArrayToObject(System.Byte[])">
+            <summary>
+            Десирализация
+            </summary>
+            <param name="arrBytes">byte[]</param>
+            <returns>Объект</returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.ClearSqlString(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.ClearKey(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.GetDataSet``1(System.String)">
+            <summary>
+            Получение DataSet c с таблицами по запросу
+            </summary>
+            <typeparam name="T">Тип класса Куда будет вводится ошибка</typeparam>
+            <param name="sqlAll">Полный SQL запрос</param>
+            <returns>ДатаСет с таблицами </returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.GetDataSet(System.String)">
+            <summary>
+            </summary>
+            <param name="sqlAll"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.UpdateDataSet``1(System.Data.DataSet)">
+            <summary>
+            Обновление таблиц датасета, Внимание таблица должна быть получена через Util.GetDataTable<T/>(string sql_All)
+            </summary>
+            <typeparam name="T">Тип куда будит выводитсяошибки</typeparam>
+            <param name="dataset"></param>
+            <returns>затронутые строки</returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.GetTable``1(System.Collections.Generic.IEnumerable{``0})">
+            <summary>
+            Получение DataTable  из Листа, при помощи рефлексии и атрибута CurrentTableAttribute
+            </summary>
+            <typeparam name="T">Тип класса для таблицы</typeparam>
+            <param name="list">Лист объектов </param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.CreateAllTables(System.String)">
+            <summary>
+            Создание SQL запроса на создание таблиц в базе данных, в соответствии классам сущностей.
+            </summary>
+            <param name="fileNameOutSqlCreate">путь к фалу .txt, куда будет сброшен готовый SqL  на создание таблицы</param>
+        </member>
+        <member name="F:ORM_1_21_.Utils.Assembler">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:ORM_1_21_.Utils.ExecuteScalar``1(System.String)">
+            <summary>
+            </summary>
+            <param name="sqlAll">полный синтаксис  запроса</param>
+            <typeparam name="T">Тип табличной сущности</typeparam>
+            <returns>Возвращаемый обьект запроса</returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.ExecuteNonQuery``1(System.String)">
+            <summary>
+            Запрос на выполнение, не зависит от типа ( ложится ко все типам)
+            </summary>
+            <param name="sqlAll">полный синтаксис  запроса</param>
+            <returns> число затронутых строк, Т - где будем ловить исключение</returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.ImageToByte(System.Drawing.Image)">
+            <summary>
+            Получение массива байт из Image
+            </summary>
+            <param name="img">Image</param>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.ImageFromByte(System.Byte[])">
+            <summary>
+            Получение Image из массива байт
+            </summary>
+            <param name="img"></param>
+            <returns></returns>
+        </member>
+        <member name="F:ORM_1_21_.Utils.Table1AliasForJoin">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:ORM_1_21_.Utils.Table2AliasForJoin">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>
