@@ -12,8 +12,11 @@ namespace ExampleOrm
     {
         static void Main(string[] args)
         {
-            new Configure(@"Data Source=ION-PC\SQLEXPRESS;Initial Catalog=assa;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False",
-                ProviderName.MsSql, true, "E:/assa22.txt", true);
+            new Configure(connectionString: @"Data Source=ION-PC\SQLEXPRESS;Initial Catalog=assa;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False",
+                provider: ProviderName.MsSql,
+                writeLog: true, 
+                logFileName: "E:/assa22.txt",
+                usageCache: true);
             var ses = Configure.GetSessionCore();
             var eeex = ses.Querion<Body>().First();
             var erererre = ses.Querion<Telephone>().Where(a => a.IdTel > 0).Select(a => new { sd = a.Description }).Limit(0, 20).ToList();

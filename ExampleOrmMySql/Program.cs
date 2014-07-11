@@ -24,6 +24,7 @@ namespace ExampleOrmMySql
     {
         static void Main()
         {
+            //ORM_1_21_.Utils.
             new Configure("Server=localhost;Database=test;Uid=;Pwd=;charset=utf8;Allow User Variables=True;", ProviderName.MySql, true, "E:/assa22.txt", true);
 
 

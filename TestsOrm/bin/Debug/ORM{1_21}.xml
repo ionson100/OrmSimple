@@ -133,7 +133,7 @@
         </member>
         <member name="T:ORM_1_21_.Configure">
             <summary>
-            Класс для конфигурации
+            Базовый Класс для конфигурации
             </summary>
         </member>
         <member name="M:ORM_1_21_.Configure.GetSessionCore">
@@ -143,14 +143,9 @@
             <returns></returns>
             <exception cref="T:System.Exception"></exception>
         </member>
-        <member name="M:ORM_1_21_.Configure.ActivateLogger(System.String)">
-            <summary>
-            Конструктор по умолчанию, для его использования, должен быть и заполнен, конфиг файл приложения
-            </summary>
-        </member>
         <member name="M:ORM_1_21_.Configure.#ctor(System.String,ORM_1_21_.ProviderName,System.Boolean,System.String,System.Boolean)">
              <summary>
-             Конструктор для ввода данных из программы, минуя конфиг
+             Конструктор
              </summary>
              <param name="connectionString">Строка соединения с базой</param>
              <param name="provider">Провайдер соединения с базой</param>
@@ -668,21 +663,6 @@
             </summary>
             <param name="nameColumnTable">Название колонки в таблице  базы</param>
         </member>
-        <member name="M:ORM_1_21_.Attribute.MapColumnNameAttribute.DbType">
-            <summary>
-            Тип поля в базе данных
-            </summary>
-        </member>
-        <member name="P:ORM_1_21_.Attribute.MapColumnNameAttribute.TypeColumn">
-            <summary>
-            Тип колонки в таблице базы
-            </summary>
-        </member>
-        <member name="P:ORM_1_21_.Attribute.MapColumnNameAttribute.ColumnNameForReader">
-            <summary>
-            Для выборки результатов
-            </summary>
-        </member>
         <member name="T:ORM_1_21_.Attribute.CurrentTableAtribute">
             <summary>
             Атрибут для класса слоя, определяет тип и название колонки.Применяется только при транформацию листа в таблицу
@@ -1192,6 +1172,7 @@
         </member>
         <member name="T:ORM_1_21_.Utils">
             <summary>
+             Утилиты
             </summary>
         </member>
         <member name="M:ORM_1_21_.Utils.ObjectToByteArray(System.Object)">
@@ -1207,20 +1188,6 @@
             </summary>
             <param name="arrBytes">byte[]</param>
             <returns>Объект</returns>
-        </member>
-        <member name="M:ORM_1_21_.Utils.ClearSqlString(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="str"></param>
-            <returns></returns>
-        </member>
-        <member name="M:ORM_1_21_.Utils.ClearKey(System.String)">
-            <summary>
-            
-            </summary>
-            <param name="str"></param>
-            <returns></returns>
         </member>
         <member name="M:ORM_1_21_.Utils.GetDataSet``1(System.String)">
             <summary>
@@ -1257,11 +1224,6 @@
             Создание SQL запроса на создание таблиц в базе данных, в соответствии классам сущностей.
             </summary>
             <param name="fileNameOutSqlCreate">путь к фалу .txt, куда будет сброшен готовый SqL  на создание таблицы</param>
-        </member>
-        <member name="F:ORM_1_21_.Utils.Assembler">
-            <summary>
-            
-            </summary>
         </member>
         <member name="M:ORM_1_21_.Utils.ExecuteScalar``1(System.String)">
             <summary>
