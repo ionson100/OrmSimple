@@ -193,6 +193,11 @@
             <param name="exception"> </param>
             <exception cref="T:System.NotImplementedException"></exception>
         </member>
+        <member name="P:ORM_1_21_.ExceptionOrm.ExceptionCore">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:ORM_1_21_.Linq.ExpressionVisitor">
             <summary>
             
@@ -768,12 +773,13 @@
             </summary>
             <typeparam name="T">тип где происходит исключение, метод где возникло исключение</typeparam>
         </member>
-        <member name="M:ORM_1_21_.IErrorDal`1.ErrorDal(`0,System.String)">
+        <member name="M:ORM_1_21_.IErrorDal`1.ErrorDal(`0,System.Exception)">
             <summary>
             </summary>
             <param name="currentObject"></param>
-            <param name="metod"></param>
-            <param name="messageError"></param>
+            <param name="metod">Метод где произошло исключение</param>
+            <param name="messageError">Message text</param>
+            <param name="exception">Тип исключения</param>
         </member>
         <member name="T:ORM_1_21_.ISession">
             <summary>
@@ -1195,7 +1201,7 @@
             <summary>
             Проверка вводимых данных, для проверки отнаследуйте свой табличный класс от этого интерфейса
             </summary>
-            <param name="type"></param>
+            <param name="item"></param>
         </member>
         <member name="T:ORM_1_21_.Transaction.Transactionale">
             <summary>
