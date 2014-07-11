@@ -38,7 +38,7 @@ namespace TestsOrm
         [MapColumnName("description")]
         public string Description { get; set; }
 
-        public void ErrorDal(Body currentObject, string messageError)
+        public void ErrorDal(Body currentObject, Exception exception)
         {
             throw new NotImplementedException();
         }
@@ -46,6 +46,10 @@ namespace TestsOrm
         public void Validate(Body type)
         {
             _validate = true;
+            if (type.Description == "2222")
+            {
+                type.Description = "1111";
+            }
         }
 
         public void BeforeInsert(Body item)

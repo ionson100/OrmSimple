@@ -269,6 +269,29 @@ namespace TestsOrm
             Assert.True(count == 0);
         }
 
+
+        [Test]
+        public void TestValidate()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestDelete");
+          
+            var body = new Body{Description = "2222"};
+            ses.Save(body);
+
+            
+
+           
+            var list1 = ses.Querion<Body>().ToList();
+            foreach (var testCustom in list1)
+            {
+                ses.Delete(testCustom);
+            }
+            PrintSecondGround(ses, "TestDelete");
+            ses.Dispose();
+            Assert.True(body.Description=="1111");
+        }
+
         void PrintFirstGround(ISession ses, string testName)
         {
             ses.WriteLogFile(string.Format("{1}старт тест {0} _______________________________________________ {1}", testName, Environment.NewLine));
