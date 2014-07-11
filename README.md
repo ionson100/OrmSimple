@@ -6,9 +6,9 @@ OrmSimple
 <pre><code class='language-cs'>
  new Configure(connectionString: @"Data Source=ION-PC\SQLEXPRESS;Initial Catalog=assa;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False",
                 provider: ProviderName.MsSql,
-                writeLog: true, //использование логироания
+                writeLog: true, //использование логгирования
                 logFileName: "E:/assa22.txt",
-                usageCache: true);//использование кеша второго уровня
+                usageCache: true);//использование кеша второго уровня, кеш первого уровня включен всегда
 </code></pre>
 Минимум аттрибутов и интерфейсов, поддерживает наследование, отсутствует авто валидация
 и контент - еденица работы, объекты из базы не проксируются.
