@@ -28,13 +28,13 @@
         </member>
         <member name="P:ORM_1_21_.Attribute.BaseAttribute.PropertyName">
             <summary>
-            Название проперти которое соответствует данной
+            Название свойства, которое соответствует данной
             колонке в таблице, в классе сущности
             </summary>
         </member>
         <member name="T:ORM_1_21_.Attribute.MapForeignKeyAttribute">
             <summary>
-            Обозначает поля для связи  для наследования и выборки по join
+            Обозначает поля для связи  для наследования и выборки по join 
             </summary>
         </member>
         <member name="P:ORM_1_21_.Attribute.MapForeignKeyAttribute.ColumnName">
@@ -44,12 +44,12 @@
         </member>
         <member name="P:ORM_1_21_.Attribute.MapForeignKeyAttribute.PropertyName">
             <summary>
-            Название проперти в объекте
+            Название свойства в объекте
             </summary>
         </member>
         <member name="T:ORM_1_21_.Attribute.MapBaseKeyAttribute">
             <summary>
-            Атрибут поля для левой таблицы ( бозовой) для наследования выборка по Join
+            Атрибут поля для левой таблицы ( базовой) для наследования выборка по Join
             </summary>
         </member>
         <member name="P:ORM_1_21_.Attribute.MapBaseKeyAttribute.ColumnName">
@@ -501,35 +501,30 @@
         </member>
         <member name="M:ORM_1_21_.Helper.WhereFindLikeStartsWith``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
             <summary>
-            Выполнение произвольного запроса из  валидной строки, резултат итема колекции должен быть T
-            </summary>
-            <returns></returns>
-            <exception cref="T:System.Exception"></exception>
-            <summary>
             Поиск LIKE 'cc%'
             </summary>
-            <param name="coll"></param>
-            <param name="exp"></param>
-            <typeparam name="T">Тип проекции таблицы</typeparam>
-            <returns></returns>
+            <param name="coll">IQueryable(Т)</param>
+            <param name="exp">Функция предиката поиска</param>
+            <typeparam name="T">Тип объектов для операции</typeparam>
+            <returns>IQueryable(Т)</returns>
         </member>
         <member name="M:ORM_1_21_.Helper.WhereFindLikeContains``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
             <summary>
             Поиск LIKE '%cc%'
             </summary>
-            <param name="coll"></param>
-            <param name="exp"></param>
-            <typeparam name="T"></typeparam>
-            <returns></returns>
+            <param name="coll">IQueryable(Т)</param>
+            <param name="exp">Функция предиката поиска</param>
+            <typeparam name="T">Тип объектов для операции</typeparam>
+            <returns>IQueryable(Т)</returns>
         </member>
         <member name="M:ORM_1_21_.Helper.WhereFindLikeEndsWith``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Boolean}})">
             <summary>
             Поиск LIKE '%cc'
             </summary>
-            <param name="coll"></param>
-            <param name="exp"></param>
-            <typeparam name="T">Тип проекции таблицы</typeparam>
-            <returns></returns>
+            <param name="coll">IQueryable(Т)</param>
+            <param name="exp">Функция предиката поиска</param>
+            <typeparam name="T">Тип объектов для операции</typeparam>
+            <returns>IQueryable(Т)</returns>
         </member>
         <member name="M:ORM_1_21_.Helper.Update``3(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.Dictionary{``1,``2}}})">
             <summary>
@@ -538,8 +533,8 @@
             <param name="coll"></param>
             <param name="parametr">Словарь поле - значение</param>
             <typeparam name="T">Тип проекции таблицы</typeparam>
-            <typeparam name="TKey"></typeparam>
-            <typeparam name="TValue"></typeparam>
+            <typeparam name="TKey">Свойство - поле</typeparam>
+            <typeparam name="TValue">Значение</typeparam>
             <returns></returns>
         </member>
         <member name="M:ORM_1_21_.Helper.OverCache``1(System.Linq.IQueryable{``0})">
@@ -591,8 +586,8 @@
             </summary>
             <param name="ses">ISession</param>
             <param name="sql">Текст запроса</param>
-            <typeparam name="TResult">Тип результата</typeparam>
-            <returns></returns>
+            <typeparam name="TResult">Тип перечисления</typeparam>
+            <returns>IEnumerable(TResult)</returns>
         </member>
         <member name="M:ORM_1_21_.Helper.ProcedureCallParam``1(ORM_1_21_.ISession,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.String,ORM_1_21_.ParameterStoredPr[])">
             <summary>
@@ -602,8 +597,8 @@
             <param name="parout"></param>
             <param name="sql">Текст процедуры</param>
             <param name="par">Праметры</param>
-            <typeparam name="TResult">Тип еденицы результата</typeparam>
-            <returns></returns>
+            <typeparam name="TResult">Тип еденицы перчисления</typeparam>
+            <returns>IEnumerable(TResult)</returns>
         </member>
         <member name="T:ORM_1_21_.IActionsForCollection">
             <summary>
@@ -617,7 +612,7 @@
         </member>
         <member name="F:ORM_1_21_.Generator.Native">
             <summary>
-            автоикремент
+            автоинкримент
             </summary>
         </member>
         <member name="F:ORM_1_21_.Generator.Assigned">
@@ -627,7 +622,7 @@
         </member>
         <member name="T:ORM_1_21_.Attribute.MapPrimaryKeyAttribute">
             <summary>
-            Атрибут для указания первичного ключа для таблицы
+            Атрибут для указания первичного ключа для таблицы ( составные ключи не работают)
             </summary>
         </member>
         <member name="M:ORM_1_21_.Attribute.MapPrimaryKeyAttribute.#ctor(System.String,ORM_1_21_.Generator)">
@@ -659,7 +654,7 @@
         </member>
         <member name="T:ORM_1_21_.Attribute.MapCustomTypeAttribute">
             <summary>
-            Тип сериализуемый в поле таблицы
+            Тип сериализуемый в поле таблицы, если вы желаете сериализовать в массив байтов объект, то тип должен быть помечен этим атрибутом
             </summary>
         </member>
         <member name="T:ORM_1_21_.Attribute.MapColumnNameAttribute">
@@ -672,13 +667,6 @@
             Конструктор
             </summary>
             <param name="nameColumnTable">Название колонки в таблице  базы</param>
-        </member>
-        <member name="M:ORM_1_21_.Attribute.MapColumnNameAttribute.#ctor(System.String,System.Int32)">
-            <summary>
-            
-            </summary>
-            <param name="nameColumnTable"></param>
-            <param name="maxLength"></param>
         </member>
         <member name="M:ORM_1_21_.Attribute.MapColumnNameAttribute.DbType">
             <summary>
@@ -695,14 +683,9 @@
             Для выборки результатов
             </summary>
         </member>
-        <member name="P:ORM_1_21_.Attribute.MapColumnNameAttribute.MaxLength">
-            <summary>
-            Максимальная длина для символьных полей
-            </summary>
-        </member>
         <member name="T:ORM_1_21_.Attribute.CurrentTableAtribute">
             <summary>
-            Атрибут для класса слоя, определяет тип и название колонки только при транформацию листа в таблицу
+            Атрибут для класса слоя, определяет тип и название колонки.Применяется только при транформацию листа в таблицу
             </summary>
         </member>
         <member name="M:ORM_1_21_.Attribute.CurrentTableAtribute.#ctor(System.Type,System.String)">
@@ -771,14 +754,12 @@
             отлов ощибки в обьекте табличного класса, для отлова, отнаследуйте  табличный класс от этого интерфейса
             и смотрите в обработчике причины исключения
             </summary>
-            <typeparam name="T">тип где происходит исключение, метод где возникло исключение</typeparam>
+            <typeparam name="T">тип где происходит исключение</typeparam>
         </member>
         <member name="M:ORM_1_21_.IErrorDal`1.ErrorDal(`0,System.Exception)">
             <summary>
             </summary>
-            <param name="currentObject"></param>
-            <param name="metod">Метод где произошло исключение</param>
-            <param name="messageError">Message text</param>
+            <param name="currentObject">Текущий объект с которым произошло исключение</param>
             <param name="exception">Тип исключения</param>
         </member>
         <member name="T:ORM_1_21_.ISession">
@@ -788,29 +769,29 @@
         </member>
         <member name="M:ORM_1_21_.ISession.GetList``1(System.String)">
             <summary>
-            Возвращает лист оъектов  табличной сущности
+            Возвращает перечисление объектов  табличной сущности
             </summary>
             <typeparam name="T">Тип класса сущности</typeparam>
             <param name="sqlWhere">Запрос на выборку начиная с Where, Where включительно
             для полной выборки можно указать "" или NULL</param>
-            <returns>Лист оьектов сущности</returns>
+            <returns>Перечисление обьектов сущности</returns>
         </member>
         <member name="M:ORM_1_21_.ISession.GetList``1">
             <summary>
-              Возвращает лист оъектов  табличной сущности
+              Возвращает перечисление  объектов  табличной сущности
             </summary>
             <typeparam name="T">Тип класса сущности</typeparam>
-            <returns>Лист оьектов сущности</returns>
+            <returns>Перечисление обьектов сущности</returns>
         </member>
         <member name="M:ORM_1_21_.ISession.GetList``1(System.String,System.Boolean)">
             <summary>
-             Возвращает лист оъектов  табличной сущности
+             Возвращает перечисление объектов  табличной сущности
             </summary>
              <param name="sqlWhere">Запрос на выборку  включительно
              для полной выборки можно указать "" или NULL</param>
             <param name="isUsingCache">оверкеш</param>
             <typeparam name="T"></typeparam>
-            <returns>Лист оьектов сущности</returns>
+            <returns>Перечисление обьектов сущности</returns>
         </member>
         <member name="M:ORM_1_21_.ISession.GetListParam``1(System.String,System.Object[])">
             <summary>
@@ -819,35 +800,35 @@
             <param name="sqlWhere">запрос на выборку, начиная с where  с праметрами</param>
             <param name="obj">список параметров в той последовательности в которой они идут в запросе.</param>
             <typeparam name="T">Тип сущности</typeparam>
-            <returns></returns>
+            <returns>Перечисление выбранных объектов</returns>
         </member>
         <member name="M:ORM_1_21_.ISession.GetListParam``1(System.Boolean,System.String,System.Object[])">
             <summary>
              запрос на выборку с параметрами и ключем для фиксации запроса в глобальном кеше
             </summary>
-            <param name="isUsingCache">оверкеш</param>
+            <param name="isUsingCache">оверкеш, истина - читаетсяя и заночится в кеш, ложь - кеш не используется</param>
             <param name="sqlWhere">запрос на выборку, начиная с where  с праметрами</param>
             <param name="obj">список параметров в той последовательности в которой они идут в запросе.</param>
             <typeparam name="T">тип табличной сущьности</typeparam>
-            <returns></returns>
+            <returns>Перечисление выбранных объектов</returns>
         </member>
         <member name="M:ORM_1_21_.ISession.Save``1(``0)">
             <summary>
             Сохранение обьекта в базе равно как вставка и изменение
             </summary>
             <typeparam name="T">Тип обьекта</typeparam>
-            <param name="item">сохраняемый объект</param>
+            <param name="item">Сохраняемый объект</param>
         </member>
         <member name="M:ORM_1_21_.ISession.Delete``1(``0)">
             <summary>
-            Удаление объекта из базы
+            Удаление объекта из базы, возвращаете количество удаленных объектов
             </summary>
             <typeparam name="T">Тип удаляемого объекта</typeparam>
             <param name="item">Удаляемый объект</param>
         </member>
         <member name="M:ORM_1_21_.ISession.GetListFromClassProprty``1(System.String)">
             <summary>
-            Получение листа объекта из базы
+            Получение перечисления объекта из базы
             </summary>
             <typeparam name="T">Тип объекта</typeparam>
             <param name="sqlWhereForClassProprtyName">Запрос на выборку, вместо полей базы, можно указывать поля класса, для таблицы базы
@@ -856,7 +837,7 @@
         </member>
         <member name="M:ORM_1_21_.ISession.ClearCache``1">
             <summary>
-            Очистка кеша удаляются вся информаия о типе из глобального кеша, и чистится кеш сесии
+            Очистка кеша удаляются вся информаия о типе из глобального кеша, и чистится кеш сессии
             </summary>
         </member>
         <member name="M:ORM_1_21_.ISession.BeginTransaction">
@@ -869,7 +850,7 @@
             <summary>
              Получение объекта ITransaction с одновременно началом трансакции, с параметрами
             </summary>
-            <param name="value"></param>
+            <param name="value">Параметр изоляции транакции</param>
             <returns></returns>
         </member>
         <member name="M:ORM_1_21_.ISession.Get``1(System.Object)">
@@ -882,7 +863,7 @@
         </member>
         <member name="M:ORM_1_21_.ISession.GetList``1(``0,System.String,System.Boolean)">
             <summary>
-            Получение  списка сущностей, по объекту как модели
+            Получение  перечисления  сущностей, по объекту как модели
             </summary>
             <param name="obj">модель</param>
             <param name="sqlWhere">запрос</param>
@@ -891,17 +872,17 @@
         </member>
         <member name="M:ORM_1_21_.ISession.Querion``1">
             <summary>
-            Выборка через Linq
+            Выборка через Linq to Sql
             </summary>
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
         <member name="M:ORM_1_21_.ISession.IsPersistent(System.Object)">
             <summary>
-            Из базы ли обьект
+            Определяет, получен ли объект с базы, или был создан на клиенте
             </summary>
-            <param name="obj"></param>
-            <returns></returns>
+            <param name="obj">Объект проверяемый</param>
+            <returns>True -из базы, False - созданный на клиенте</returns>
         </member>
         <member name="M:ORM_1_21_.ISession.ToPersistent(System.Object)">
             <summary>
@@ -911,7 +892,7 @@
         </member>
         <member name="M:ORM_1_21_.ISession.WriteLogFile(System.String)">
             <summary>
-            Запись в лог
+            Запись в лог, если запись в лог включена, при инициализации орм, можно записать текст сообщенгия напрямую
             </summary>
             <param name="message">сообщение</param>
         </member>
@@ -1201,7 +1182,7 @@
             <summary>
             Проверка вводимых данных, для проверки отнаследуйте свой табличный класс от этого интерфейса
             </summary>
-            <param name="item"></param>
+            <param name="item">Проверяемый объект</param>
         </member>
         <member name="T:ORM_1_21_.Transaction.Transactionale">
             <summary>

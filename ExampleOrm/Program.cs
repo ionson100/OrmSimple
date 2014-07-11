@@ -261,12 +261,12 @@ namespace ExampleOrm
 
         [MapPrimaryKeyAttribute("[id_tel]", Generator.Native)]
         public virtual Decimal IdTel { get; set; }
-        [MapColumnNameAttribute("[name_telephone]", 4000)]
+        [MapColumnNameAttribute("[name_telephone]")]
         public virtual string NameTelephone { get; set; }
         [MapForeignKey]
-        [MapColumnNameAttribute("[id_body]", 4000)]
+        [MapColumnNameAttribute("[id_body]")]
         public virtual Decimal IdBody { get; set; }
-        [MapColumnNameAttribute("[datet]", 4000)]
+        [MapColumnNameAttribute("[datet]")]
         public DateTime Datet { get; set; }
     }
     [MapTableName("[Table]")]
