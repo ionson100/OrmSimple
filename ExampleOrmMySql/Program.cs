@@ -25,12 +25,18 @@ namespace ExampleOrmMySql
         static void Main()
         {
             //ORM_1_21_.Utils.
-            new Configure("Server=localhost;Database=test;Uid=;Pwd=;charset=utf8;Allow User Variables=True;", ProviderName.MySql, true, "E:/assa22.txt", true);
+            new Configure("Server=localhost;Database=test;Uid=root;Pwd=;charset=utf8;Allow User Variables=True;", ProviderName.MySql, true, "E:/assa22.txt", true);
 
 
 
 
             var ses = Configure.GetSessionCore();
+
+            Dictionary<string, object> ddssObjects;
+            object iis = 1;
+            var eedff = ses.ProcedureCallParam<Object>(out ddssObjects, "Assa2;",
+                new ParameterStoredPr("p1", "qwqwqw", ParameterDirection.Input, "p1"),
+                new ParameterStoredPr("p2", 2, ParameterDirection.Output, "p2")).Count();
 
             //var ss1 = ses.Querion<Telephone>().Select(a => new {a.Name}).DistinctCore(d=>d.Name).ToList();
            
@@ -44,7 +50,7 @@ namespace ExampleOrmMySql
             var sdsqwwwawwdas = ses.FreeSqlParam<Body>("select id,description from body where id >?p1", new Parameter("p1", 0));
             var sdsawwwwdas = ses.FreeSqlParam<dynamic>("select id,description from body where id >?p1", new Parameter("p1", 0));
             var sdswadas = ses.FreeSqlParam<Test1>("select id,description from body where id >?p1", new Parameter("p1", 0));
-            //var sasdasd = ses.ProcedureCall<Body>("Assa1;");
+            var sasdasd = ses.ProcedureCall<Body>("Assa1;");
             //Dictionary<string, object> ddss;
             //var sasdwwasd = ses.ProcedureCallParam<object>(out ddss, "ion100",
             //                                             new ParameterStoredPr("p1", 0, ParameterDirection.Input, null),

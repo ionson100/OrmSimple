@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace TestsOrm
     [TestFixture]
     public class NUnitTestFixture
     {
-        Configure fg = new Configure("Server=localhost;Database=test;Uid=;Pwd=;charset=utf8;Allow User Variables=True;", ProviderName.MySql, true, "E:/assa22.txt", true);
+        Configure fg = new Configure("Server=localhost;Database=test;Uid=root;Pwd=;charset=utf8;Allow User Variables=True;", ProviderName.MySql, true, "E:/assa22.txt", true);
         [Test]
         public void TestImage()
         {
@@ -291,6 +292,56 @@ namespace TestsOrm
             ses.Dispose();
             Assert.True(body.Description=="1111");
         }
+
+
+        [Test]
+        public void TestProcedure()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestProcedure");
+
+            var body = new Body { Description = "2222" };
+            ses.Save(body);
+
+            var ee = ses.ProcedureCall<Body>("Assa1;").Count();
+
+
+            var list1 = ses.Querion<Body>().ToList();
+            foreach (var testCustom in list1)
+            {
+                ses.Delete(testCustom);
+            }
+            PrintSecondGround(ses, "TestProcedure");
+            ses.Dispose();
+            Assert.True(ee==1);
+        }
+
+        [Test]
+        public void TestProcedureParam()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestProcedureParam");
+
+            var body = new Body { Description = "2222" };
+            ses.Save(body);
+            Dictionary<string, object> ddssObjects;
+            object iis = 1;
+            var ee = ses.ProcedureCallParam<object>(out ddssObjects, "Assa2;",
+                new ParameterStoredPr("p1", "qwqwqw", ParameterDirection.Input, "p1"),
+                new ParameterStoredPr("p2", iis, ParameterDirection.InputOutput,"p1")).Count();
+
+
+            var list1 = ses.Querion<Body>().ToList();
+            foreach (var testCustom in list1)
+            {
+                ses.Delete(testCustom);
+            }
+            PrintSecondGround(ses, "TestProcedureParam");
+            ses.Dispose();
+            Assert.True(ee == 1);
+        }
+
+
 
         void PrintFirstGround(ISession ses, string testName)
         {
