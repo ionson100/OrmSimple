@@ -33,6 +33,7 @@ namespace ExampleOrmMySql
             var ses = Configure.GetSessionCore();
 
             ses.Save(new Body());
+            var ererrrrr = ses.Querion<Body>().Last().Description;
 
             var p1 = new ParameterStoredPr("p1", "qwqwqw", ParameterDirection.Input);
             var p2 = new ParameterStoredPr("p2", 2, ParameterDirection.Output);
@@ -347,6 +348,7 @@ namespace ExampleOrmMySql
             var edfgase = ses.GetList<Telephone>().ToList();
 
             var ser = ses.GetList(new Telephone(), "", false);
+            var sdfer = ses.GetList(new Telephone(), "", true);
             var kkaa = ses.Querion<Telephone>().WhereFindLikeStartsWith(a => a.Description == "asas").ToList();
             var kk1a = ses.Querion<Telephone>().WhereFindLikeEndsWith(a => a.Description == " asas").ToList();
             var kk2a = ses.Querion<Telephone>().ToList();

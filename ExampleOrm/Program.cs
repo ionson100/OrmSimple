@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using ORM_1_21_;
@@ -75,7 +76,7 @@ namespace ExampleOrm
             var trans = ses.BeginTransaction();
             var t1 = ses.GetList<Body>();
             var t1a2 = ses.GetList<Body>(" id < 4000000").First();
-            t1a2.Name = DateTime.Now.ToString();
+            t1a2.Name = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             ses.Save(t1a2);
             var t2 = ses.GetList<Body>(" id < 4000000");
             var t3 = ses.GetList<Body>(" id < 4000000");

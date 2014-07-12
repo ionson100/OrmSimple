@@ -588,7 +588,6 @@
             Вызов хранимой процедуры с параметрами
             </summary>
             <param name="ses">ISession</param>
-            <param name="parout"></param>
             <param name="sql">Текст процедуры</param>
             <param name="par">Праметры</param>
             <typeparam name="TResult">Тип еденицы перчисления</typeparam>
@@ -927,7 +926,14 @@
             
             </summary>
             <param name="expression"></param>
-            <param name="singl"></param>
+            <typeparam name="TS"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Linq.QueryProvider.ExecuteSPP``1(System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="expression"></param>
             <typeparam name="TS"></typeparam>
             <returns></returns>
         </member>
@@ -974,7 +980,7 @@
         </member>
         <member name="M:ORM_1_21_.Linq.Query`1.GetTypeQuery">
             <summary>
-            Тип T
+            Тип 
             </summary>
             <returns></returns>
         </member>

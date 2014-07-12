@@ -4,6 +4,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Transactions;
 using MySql.Data.MySqlClient;
 using NUnit.Framework;
 using ORM_1_21_;
@@ -86,17 +87,14 @@ namespace TestsOrm
         public void TestInterface()
         {
             var ses = Configure.GetSessionCore();
-            var list = ses.Querion<Body>().ToList();
-            foreach (var c in list)
-            {
-                ses.Delete(c);
-            }
+            Clear(ses);
             var body = new Body();
             ses.Save(body);
             body.Description = "sasda";
             ses.Save(body);
             ses.Delete(body);
             var count = ses.Querion<Body>().Count();
+            Clear(ses);
             ses.Dispose();
             Assert.True(body.IsDelete && body.IsInsert && body.IsDelete && count == 0);
         }
@@ -106,12 +104,13 @@ namespace TestsOrm
         {
 
             var ses = Configure.GetSessionCore();
+            Clear(ses);
             for (var i = 0; i < 50; i++)
             {
                 var b = new Body { Description = "dsdsdf" };
                 ses.Save(b);
             }
-            var d = ses.Querion<Body>().First(a => a.Description != null);
+            var d = ses.Querion<Body>().First(a => a.Description != null);//разогрев
             var stopWatch = new Stopwatch();
             stopWatch.Start();
 
@@ -121,10 +120,7 @@ namespace TestsOrm
             Debug.WriteLine("ORM: " + stopWatch.Elapsed);// 00:00:00.0120545
 
 
-            foreach (var c in list)
-            {
-                ses.Delete(c);
-            }
+            Clear(ses);
 
             Assert.True(list.Count() == 50);
         }
@@ -133,6 +129,7 @@ namespace TestsOrm
         public void TestSpeedCore()
         {
             var ses = Configure.GetSessionCore();
+            Clear(ses);
             for (var i = 0; i < 50; i++)
             {
                 var b = new Body { Description = "dsdsdf" };
@@ -157,11 +154,7 @@ namespace TestsOrm
             stopWatch.Stop();
             Debug.WriteLine("ADO.NetCore: " + stopWatch.Elapsed);//ORMCore: 00:00:00.0132468
 
-            var list = ses.Querion<Body>().Where(a => a.Description != null).ToArray();
-            foreach (var c in list)
-            {
-                ses.Delete(c);
-            }
+            Clear(ses);
             Assert.True(true);
         }
 
@@ -170,11 +163,7 @@ namespace TestsOrm
         {
             var ses = Configure.GetSessionCore();
 
-            var list = ses.Querion<Body>().ToArray();
-            foreach (var testCustom in list)
-            {
-                ses.Delete(testCustom);
-            }
+            Clear(ses);
 
             ses.Save(new Body());
             var c = ses.Querion<Body>().ToList().Count();
@@ -184,11 +173,7 @@ namespace TestsOrm
             var c1 = ses1.Querion<Body>().ToList().Count();
             var c2 = ses.Querion<Body>().ToList().Count();
 
-            var list1 = ses.Querion<Body>().ToArray();
-            foreach (var cc in list1)
-            {
-                ses.Delete(cc);
-            }
+            Clear(ses);
 
             ses.Dispose();
             ses1.Dispose();
@@ -200,25 +185,14 @@ namespace TestsOrm
         {
             var ses = Configure.GetSessionCore();
             PrintFirstGround(ses, "TestCacheSecondLevel");
-            var list = ses.Querion<Body>().ToArray();
-            foreach (var testCustom in list)
-            {
-                ses.Delete(testCustom);
-            }
+            Clear(ses);
 
             ses.Save(new Body());
             var c = ses.Querion<Body>().ToList();
             ses.WriteLogFile("Запрос  получен из кеша, смотри лог");
 
             var ses1 = Configure.GetSessionCore();
-            var list1 = ses1.Querion<Body>().ToList();
-
-
-
-            foreach (var cc in list1)
-            {
-                ses.Delete(cc);
-            }
+            Clear(ses);
             PrintSecondGround(ses, "TestCacheSecondLevel");
             ses.Dispose();
 
@@ -230,19 +204,11 @@ namespace TestsOrm
         {
             var ses = Configure.GetSessionCore();
             PrintFirstGround(ses, "TestUpdate");
-            var list = ses.Querion<Body>().ToArray();
-            foreach (var testCustom in list)
-            {
-                ses.Delete(testCustom);
-            }
+            Clear(ses);
             ses.Save(new Body());
             ses.Querion<Body>().Where(s => s.Description == null).Update(a => new Dictionary<object, object> { { a.Description, "312312" } });
             var description = ses.Querion<Body>().First().Description;
-            var list1 = ses.Querion<Body>().ToList();
-            foreach (var c in list1)
-            {
-                ses.Delete(c);
-            }
+            Clear(ses);
             PrintSecondGround(ses, "TestUpdate");
             ses.Dispose();
             Assert.True(description == "312312");
@@ -253,22 +219,14 @@ namespace TestsOrm
         {
             var ses = Configure.GetSessionCore();
             PrintFirstGround(ses, "TestDelete");
-            var list = ses.Querion<Body>().ToArray();
-            foreach (var testCustom in list)
-            {
-                ses.Delete(testCustom);
-            }
+            Clear(ses);
             var body = new Body();
             ses.Save(body);
 
             ses.Querion<Body>().Delete(a => a.Description == null);
 
             var count = ses.Querion<Body>().Count(a => a.Description == null);
-            var list1 = ses.Querion<Body>().ToList();
-            foreach (var c in list1)
-            {
-                ses.Delete(c);
-            }
+            Clear(ses);
             PrintSecondGround(ses, "TestDelete");
             ses.Dispose();
             Assert.True(count == 0);
@@ -280,21 +238,17 @@ namespace TestsOrm
         {
             var ses = Configure.GetSessionCore();
             PrintFirstGround(ses, "TestDelete");
-          
-            var body = new Body{Description = "2222"};
+            Clear(ses);
+            var body = new Body { Description = "2222" };
             ses.Save(body);
 
-            
 
-           
-            var list1 = ses.Querion<Body>().ToList();
-            foreach (var c in list1)
-            {
-                ses.Delete(c);
-            }
+
+
+            Clear(ses);
             PrintSecondGround(ses, "TestDelete");
             ses.Dispose();
-            Assert.True(body.Description=="1111");
+            Assert.True(body.Description == "1111");
         }
 
 
@@ -303,6 +257,8 @@ namespace TestsOrm
         {
             var ses = Configure.GetSessionCore();
             PrintFirstGround(ses, "TestProcedure");
+            Clear(ses);
+
 
             var body = new Body { Description = "2222" };
             ses.Save(body);
@@ -310,21 +266,19 @@ namespace TestsOrm
             var ee = ses.ProcedureCall<Body>("Assa1;").Count();
 
 
-            var list1 = ses.Querion<Body>().ToList();
-            foreach (var c in list1)
-            {
-                ses.Delete(c);
-            }
+            Clear(ses);
             PrintSecondGround(ses, "TestProcedure");
             ses.Dispose();
-            Assert.True(ee==1);
+            Assert.True(ee == 1);
         }
 
         [Test]
         public void TestProcedureParam()
         {
+
             var ses = Configure.GetSessionCore();
             PrintFirstGround(ses, "TestProcedureParam");
+            Clear(ses);
 
             var body = new Body { Description = "2222" };
             ses.Save(body);
@@ -333,14 +287,10 @@ namespace TestsOrm
             var res = ses.ProcedureCallParam<Body>("Assa2;", p1, p2).ToList();
 
 
-            var list1 = ses.Querion<Body>().ToList();
-            foreach (var c in list1)
-            {
-                ses.Delete(c);
-            }
+            Clear(ses);
             PrintSecondGround(ses, "TestProcedureParam");
             ses.Dispose();
-            Assert.True((int)p2.Value ==  100);
+            Assert.True((int)p2.Value == 100);
         }
 
 
@@ -348,22 +298,16 @@ namespace TestsOrm
         public void TestUsageNativData()
         {
             var ses = Configure.GetSessionCore();
-            var list1 = ses.Querion<Body>().Where(a => a.Description != null).ToArray();
-            foreach (var c in list1)
-            {
-                ses.Delete(c);
-            }
+            Clear(ses);
             for (var i = 0; i < 10; i++)
             {
                 var b = new Body { Description = "dsdsdf" };
                 ses.Save(b);
             }
-
             var command = ses.GetCommand();
             command.CommandText = "select * from body ";
             command.Connection = ses.GetConnection();
             command.Connection.ConnectionString = ses.GetConnectionString();
-
             command.Connection.Open();
             var rider = command.ExecuteReader();
             int ie = 0;
@@ -375,18 +319,89 @@ namespace TestsOrm
             rider.Dispose();
             command.Dispose();
 
-            
-          
 
-            var list = ses.Querion<Body>().Where(a => a.Description != null).ToArray();
-            foreach (var c in list)
+
+
+            Clear(ses);
+            Assert.True(ie == 10);
+        }
+
+        [Test]
+        public void TestOverCache()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestOverCache");
+            Clear(ses);
+
+            var b = new Body { Description = "dsdsdf" };
+            ses.Save(b);
+
+
+            var r1 = ses.Querion<Body>().ToList().Count();//1
+
+            var ses1 = Configure.GetSessionCore();
+            ses1.Save(new Body { Description = "ass" });
+
+            var r21 = ses1.Querion<Body>().ToList().Count();//2
+
+            var r2 = ses.Querion<Body>().ToList().Count();//1
+
+            var r3 = ses.Querion<Body>().OverCache().Where(s => s.Description != null).ToList().Count();//2
+
+            Clear(ses);
+            PrintSecondGround(ses, "TestOverCache");
+            Assert.True(r1 == 1 && r2 == 1 && r3 == 2);
+        }
+        [Test]
+        public void TestTrasactionScope()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestTrasactionScope");
+            Clear(ses);
+            using (var scope = new TransactionScope())
             {
-                ses.Delete(c);
+                var b = new Body { Description = "dsdsdf" };
+                ses.Save(b);
+                var ses1 = Configure.GetSessionCore();
+                ses1.Save(new Body());
             }
-            Assert.True(ie==10);
+            var ee = ses.Querion<Body>().ToList().Count;
+            Clear(ses);
+            ses.Dispose();
+            PrintSecondGround(ses, "TestTrasactionScope");
+            Assert.True(ee == 0);
+
         }
 
 
+        [Test]
+        public void TestGetResemblance()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestGetResemblance");
+            Clear(ses);
+
+            var b = new Body { Description = "1233" };
+            ses.Save(b);
+
+            var ee = ses.GetList(b, "", true).First().Description;
+
+            Clear(ses);
+            ses.Dispose();
+            PrintSecondGround(ses, "TestGetResemblance");
+            Assert.True(ee == "1233");
+
+        }
+
+
+        void Clear(ISession ses)
+        {
+            var list1 = ses.Querion<Body>().ToList();
+            foreach (var c in list1)
+            {
+                ses.Delete(c);
+            }
+        }
 
         void PrintFirstGround(ISession ses, string testName)
         {
