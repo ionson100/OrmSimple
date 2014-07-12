@@ -133,7 +133,7 @@
         </member>
         <member name="T:ORM_1_21_.Configure">
             <summary>
-            Базовый Класс для конфигурации
+            Базовый класс для конфигурации
             </summary>
         </member>
         <member name="M:ORM_1_21_.Configure.GetSessionCore">
@@ -297,6 +297,11 @@
         <member name="P:ORM_1_21_.ParameterStoredPr.Value">
             <summary>
             Значение пераметра
+            </summary>
+        </member>
+        <member name="P:ORM_1_21_.ParameterStoredPr.Direction">
+            <summary>
+            Перечисление типа параметра
             </summary>
         </member>
         <member name="T:ORM_1_21_.ProviderName">
@@ -869,6 +874,36 @@
             Запись в лог, если запись в лог включена, при инициализации орм, можно записать текст сообщенгия напрямую
             </summary>
             <param name="message">сообщение</param>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetCommand">
+            <summary>
+            Получение автономного IDbCommand, закрывать и диспозить на вашей совести
+            </summary>
+            <returns>IDbCommand</returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetConnection">
+            <summary>
+            Получение автономного соединения в контексте орм, закрывать и очишать в ручную
+            </summary>
+            <returns>IDbConnection</returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetDataAdapter">
+            <summary>
+            Пролучение адаптреа, автономного в контексте орм, закрывать и очищать в ручную
+            </summary>
+            <returns>IDbDataAdapter</returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetDataParameter">
+            <summary>
+            Получение параметра в контектсе орм
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.ISession.GetConnectionString">
+            <summary>
+            Получение строки соединения в контексте работы орм
+            </summary>
+            <returns>Строка соединения</returns>
         </member>
         <member name="P:ORM_1_21_.ISession.IsDispose">
             <summary>

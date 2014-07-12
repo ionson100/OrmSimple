@@ -344,6 +344,49 @@ namespace TestsOrm
         }
 
 
+        [Test]
+        public void TestUsageNativData()
+        {
+            var ses = Configure.GetSessionCore();
+            var list1 = ses.Querion<Body>().Where(a => a.Description != null).ToArray();
+            foreach (var c in list1)
+            {
+                ses.Delete(c);
+            }
+            for (var i = 0; i < 10; i++)
+            {
+                var b = new Body { Description = "dsdsdf" };
+                ses.Save(b);
+            }
+
+            var command = ses.GetCommand();
+            command.CommandText = "select * from body ";
+            command.Connection = ses.GetConnection();
+            command.Connection.ConnectionString = ses.GetConnectionString();
+
+            command.Connection.Open();
+            var rider = command.ExecuteReader();
+            int ie = 0;
+            while (rider.Read())
+            {
+                ie++;
+            }
+            command.Connection.Close();
+            rider.Dispose();
+            command.Dispose();
+
+            
+          
+
+            var list = ses.Querion<Body>().Where(a => a.Description != null).ToArray();
+            foreach (var c in list)
+            {
+                ses.Delete(c);
+            }
+            Assert.True(ie==10);
+        }
+
+
 
         void PrintFirstGround(ISession ses, string testName)
         {

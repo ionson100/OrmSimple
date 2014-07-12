@@ -65,7 +65,7 @@ namespace ExampleOrmMySql
 
 
 
-            var l = ses.Querion<Telephone>().Select(a => new { dd = a.Description }).ToList();
+            var l = ses.Querion<Telephone>().OverCache().Select(a => new { dd = a.Description }).ToList();
 
 
             var rerer = ses.Querion<Table1>().Select(a => new { aa = a.Id, ass = a.Description })
