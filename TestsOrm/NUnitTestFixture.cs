@@ -45,9 +45,9 @@ namespace TestsOrm
             ses.Save(f);
             var rr = ses.Get<TestCustom>(f.Id).Class.Name == "312312";
             var list = ses.Querion<TestCustom>().ToList();
-            foreach (var testCustom in list)
+            foreach (var c in list)
             {
-                ses.Delete(testCustom);
+                ses.Delete(c);
             }
             var count = ses.Querion<TestCustom>().Count();
             ses.Dispose();
@@ -87,9 +87,9 @@ namespace TestsOrm
         {
             var ses = Configure.GetSessionCore();
             var list = ses.Querion<Body>().ToList();
-            foreach (var testCustom in list)
+            foreach (var c in list)
             {
-                ses.Delete(testCustom);
+                ses.Delete(c);
             }
             var body = new Body();
             ses.Save(body);
@@ -121,9 +121,9 @@ namespace TestsOrm
             Debug.WriteLine("ORM: " + stopWatch.Elapsed);// 00:00:00.0120545
 
 
-            foreach (var testCustom in list)
+            foreach (var c in list)
             {
-                ses.Delete(testCustom);
+                ses.Delete(c);
             }
 
             Assert.True(list.Count() == 50);
@@ -139,8 +139,12 @@ namespace TestsOrm
                 ses.Save(b);
             }
             var stopWatch = new Stopwatch();
-            MySqlCommand d = new MySqlCommand("select * from body where description <> null");
-            d.Connection = new MySqlConnection("Server=localhost;Database=test;Uid=;Pwd=;charset=utf8;Allow User Variables=True;");
+            var d = new MySqlCommand("select * from body where description <> null")
+                    {
+                        Connection =
+                            new MySqlConnection(
+                            "Server=localhost;Database=test;Uid=;Pwd=;charset=utf8;Allow User Variables=True;")
+                    };
 
             stopWatch.Start();
             d.Connection.Open();
@@ -154,9 +158,9 @@ namespace TestsOrm
             Debug.WriteLine("ADO.NetCore: " + stopWatch.Elapsed);//ORMCore: 00:00:00.0132468
 
             var list = ses.Querion<Body>().Where(a => a.Description != null).ToArray();
-            foreach (var testCustom in list)
+            foreach (var c in list)
             {
-                ses.Delete(testCustom);
+                ses.Delete(c);
             }
             Assert.True(true);
         }
@@ -181,9 +185,9 @@ namespace TestsOrm
             var c2 = ses.Querion<Body>().ToList().Count();
 
             var list1 = ses.Querion<Body>().ToArray();
-            foreach (var testCustom in list1)
+            foreach (var cc in list1)
             {
-                ses.Delete(testCustom);
+                ses.Delete(cc);
             }
 
             ses.Dispose();
@@ -211,9 +215,9 @@ namespace TestsOrm
 
 
 
-            foreach (var testCustom in list1)
+            foreach (var cc in list1)
             {
-                ses.Delete(testCustom);
+                ses.Delete(cc);
             }
             PrintSecondGround(ses, "TestCacheSecondLevel");
             ses.Dispose();
@@ -235,9 +239,9 @@ namespace TestsOrm
             ses.Querion<Body>().Where(s => s.Description == null).Update(a => new Dictionary<object, object> { { a.Description, "312312" } });
             var description = ses.Querion<Body>().First().Description;
             var list1 = ses.Querion<Body>().ToList();
-            foreach (var testCustom in list1)
+            foreach (var c in list1)
             {
-                ses.Delete(testCustom);
+                ses.Delete(c);
             }
             PrintSecondGround(ses, "TestUpdate");
             ses.Dispose();
@@ -261,9 +265,9 @@ namespace TestsOrm
 
             var count = ses.Querion<Body>().Count(a => a.Description == null);
             var list1 = ses.Querion<Body>().ToList();
-            foreach (var testCustom in list1)
+            foreach (var c in list1)
             {
-                ses.Delete(testCustom);
+                ses.Delete(c);
             }
             PrintSecondGround(ses, "TestDelete");
             ses.Dispose();
@@ -284,9 +288,9 @@ namespace TestsOrm
 
            
             var list1 = ses.Querion<Body>().ToList();
-            foreach (var testCustom in list1)
+            foreach (var c in list1)
             {
-                ses.Delete(testCustom);
+                ses.Delete(c);
             }
             PrintSecondGround(ses, "TestDelete");
             ses.Dispose();
@@ -307,9 +311,9 @@ namespace TestsOrm
 
 
             var list1 = ses.Querion<Body>().ToList();
-            foreach (var testCustom in list1)
+            foreach (var c in list1)
             {
-                ses.Delete(testCustom);
+                ses.Delete(c);
             }
             PrintSecondGround(ses, "TestProcedure");
             ses.Dispose();
@@ -324,21 +328,19 @@ namespace TestsOrm
 
             var body = new Body { Description = "2222" };
             ses.Save(body);
-            Dictionary<string, object> ddssObjects;
-            object iis = 1;
-            var ee = ses.ProcedureCallParam<object>(out ddssObjects, "Assa2;",
-                new ParameterStoredPr("p1", "qwqwqw", ParameterDirection.Input, "p1"),
-                new ParameterStoredPr("p2", iis, ParameterDirection.InputOutput,"p1")).Count();
+            var p1 = new ParameterStoredPr("p1", "qwqwqw", ParameterDirection.Input);
+            var p2 = new ParameterStoredPr("p2", 2, ParameterDirection.Output);
+            var res = ses.ProcedureCallParam<Body>("Assa2;", p1, p2).ToList();
 
 
             var list1 = ses.Querion<Body>().ToList();
-            foreach (var testCustom in list1)
+            foreach (var c in list1)
             {
-                ses.Delete(testCustom);
+                ses.Delete(c);
             }
             PrintSecondGround(ses, "TestProcedureParam");
             ses.Dispose();
-            Assert.True(ee == 1);
+            Assert.True((int)p2.Value ==  100);
         }
 
 

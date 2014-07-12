@@ -24,10 +24,12 @@ namespace ExampleOrm
             var sdsqwwwawwdas = ses.FreeSqlParam<Body>("select * from body where id >@p1", new Parameter("p1", 0));
             var sdsawwwwdas = ses.FreeSqlParam<object>("select id,description from body where id >@p1", new Parameter("p1", 0));
             var sasdasd = ses.ProcedureCall<Body>("Assa1");
-            Dictionary<string, object> ddss;
-            var sasdwwasd = ses.ProcedureCallParam<object>(out ddss, "Assa22",
-                                                         new ParameterStoredPr("p1", 0, ParameterDirection.Output, null),
-                                                         new ParameterStoredPr("p2", 0, ParameterDirection.Output, null));
+
+            var p1 = new ParameterStoredPr("p1", 0, ParameterDirection.Output);
+            var p2 = new ParameterStoredPr("p2", 0, ParameterDirection.Output);
+            var sasdwwasd = ses.ProcedureCallParam<object>( "Assa22",p1 ,p2);
+                                                       
+                                                         
             var sdswawwdas = ses.FreeSql<object>("select description from body");
             var sdsqwwawwdas = ses.FreeSql<Body>("select * from body");
             var sdsawwwdas = ses.FreeSql<object>("select id,description from body");

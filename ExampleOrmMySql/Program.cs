@@ -32,11 +32,13 @@ namespace ExampleOrmMySql
 
             var ses = Configure.GetSessionCore();
 
-            Dictionary<string, object> ddssObjects;
-            object iis = 1;
-            var eedff = ses.ProcedureCallParam<Object>(out ddssObjects, "Assa2;",
-                new ParameterStoredPr("p1", "qwqwqw", ParameterDirection.Input, "p1"),
-                new ParameterStoredPr("p2", 2, ParameterDirection.Output, "p2")).Count();
+            ses.Save(new Body());
+
+            var p1 = new ParameterStoredPr("p1", "qwqwqw", ParameterDirection.Input);
+            var p2 = new ParameterStoredPr("p2", 2, ParameterDirection.Output);
+            var res = ses.ProcedureCallParam<Body>( "Assa2;", p1, p2).ToList();
+              
+            
 
             //var ss1 = ses.Querion<Telephone>().Select(a => new {a.Name}).DistinctCore(d=>d.Name).ToList();
            

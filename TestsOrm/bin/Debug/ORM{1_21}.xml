@@ -281,19 +281,13 @@
             Еденица параметра, для запроса с параметрами
             </summary>
         </member>
-        <member name="M:ORM_1_21_.ParameterStoredPr.#ctor(System.String,System.Object,System.Data.ParameterDirection,System.String)">
+        <member name="M:ORM_1_21_.ParameterStoredPr.#ctor(System.String,System.Object,System.Data.ParameterDirection)">
             <summary>
             Ctor
             </summary>
             <param name="name">Имя парметра</param>
             <param name="value">Имя парметра</param>
-            <param name="direction"></param>
-            <param name="sourceColumn"></param>
-        </member>
-        <member name="P:ORM_1_21_.ParameterStoredPr.SourceColumn">
-            <summary>
-            Название колонки таблици
-            </summary>
+            <param name="direction">ParameterDirection </param>
         </member>
         <member name="P:ORM_1_21_.ParameterStoredPr.Name">
             <summary>
@@ -584,7 +578,7 @@
             <typeparam name="TResult">Тип перечисления</typeparam>
             <returns>IEnumerable(TResult)</returns>
         </member>
-        <member name="M:ORM_1_21_.Helper.ProcedureCallParam``1(ORM_1_21_.ISession,System.Collections.Generic.Dictionary{System.String,System.Object}@,System.String,ORM_1_21_.ParameterStoredPr[])">
+        <member name="M:ORM_1_21_.Helper.ProcedureCallParam``1(ORM_1_21_.ISession,System.String,ORM_1_21_.ParameterStoredPr[])">
             <summary>
             Вызов хранимой процедуры с параметрами
             </summary>
