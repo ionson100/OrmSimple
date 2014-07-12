@@ -18,6 +18,12 @@ namespace ExampleOrm
                 logFileName: "E:/assa22.txt",
                 usageCache: true);
             var ses = Configure.GetSessionCore();
+
+
+            var ererrrrr = ses.Querion<Body>().Last().Description;
+            var r323we = ses.Querion<Body>().ToList().Count();
+            var r323 = ses.Querion<Body>().ToList().Count();
+            var r3233 = ses.Querion<Body>().OverCache().ToList().Count();
             var eeex = ses.Querion<Body>().First();
             var erererre = ses.Querion<Telephone>().Where(a => a.IdTel > 0).Select(a => new { sd = a.Description }).Limit(0, 20).ToList();
             var sdwswawwdas = ses.FreeSqlParam<object>("select description from body where id >@p1", new Parameter("p1", 0));
@@ -98,7 +104,7 @@ namespace ExampleOrm
             var t21 = ses.Querion<Body>().ToList();
             ses.Delete(t21[0]);
 
-            var t22 = ses.Querion<Body>().ToList();
+            var t22 = ses.Querion<Body>().OverCache().ToList();
             var t23 = ses.Querion<Body>().DistinctCore(a => a.Description).ToList();
             var t24 = ses.Querion<Body>().ToList();
             var tdd = new Telephone() { Datet = DateTime.Now.AddDays(-3) };
