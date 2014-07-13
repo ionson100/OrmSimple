@@ -20,10 +20,17 @@ namespace ExampleOrm
                 usageCache: true);
             var ses = Configure.GetSessionCore();
 
+            var e1fdfd = ses.Querion<Body>().Any(a => a.Description == "4");
+            var e2dfdf = ses.Querion<Body>().OverCache().Any(a => a.Description == "1233");
+            var e3sas = ses.Querion<Body>().Any(a => a.Description == "123333333");
 
-            var eretzxzxrrrr = ses.Querion<Body>().First(a => a.Description == "4").Description;
-            var ereetrrrrr = ses.Querion<Body>().FirstOrDefault(a => a.Description == "-4");
-            var erezxzxrrrr = ses.Querion<Body>().Last(a=>a.Description=="4").Description;
+            var eretzxzxeeerrrr =
+                ses.Querion<Body>().Where(s => s.Description == "-23-23").Select(g =>new{ g.Description}).ToList();
+            var ereetrrrerr = ses.Querion<Body>().FirstOrDefault(a => a.Description == "-4");
+
+            var eretzxzxrrrrr = ses.Querion<Body>().First(a => a.Description == "4").Description;
+            var ereetrrrererrr = ses.Querion<Body>().FirstOrDefault(a => a.Description == "-4");
+            var erezxzxrrrrr = ses.Querion<Body>().Last(a=>a.Description=="4").Description;
             var ererrrrr = ses.Querion<Body>().LastOrDefault(a => a.Description == "-4");
             var r323we = ses.Querion<Body>().ToList().Count();
             var r323 = ses.Querion<Body>().ToList();

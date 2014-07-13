@@ -33,6 +33,9 @@ namespace ExampleOrmMySql
             var ses = Configure.GetSessionCore();
 
             ses.Save(new Body());
+            var e1fdfd = ses.Querion<Body>().Any(a => a.Description == "1233");
+            var e2dfdf = ses.Querion<Body>().OverCache().Any(a => a.Description == "1233");
+            var e3sas = ses.Querion<Body>().Any(a => a.Description == "123333333");
             var adffff = ses.Querion<Body>().Last().Description;
             var ererrrrr = ses.Querion<Body>().Last().Description;
 

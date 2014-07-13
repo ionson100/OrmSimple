@@ -438,6 +438,35 @@ namespace TestsOrm
 
         }
 
+         [Test]
+         public void TestAny()
+         {
+             var ses = Configure.GetSessionCore();
+             PrintFirstGround(ses, "TestAny");
+             Clear(ses);
+             var b1 = new Body { Description = "12332" };
+             ses.Save(b1);
+             var b = new Body { Description = "1233" };
+             ses.Save(b);
+
+
+             var e1 = ses.Querion<Body>().Any(a => a.Description == "1233");
+             var e2 = ses.Querion<Body>().OverCache().Any(a => a.Description == "1233");
+             var e3 = ses.Querion<Body>().Any(a => a.Description == "123333333");
+
+             ses.WriteLogFile("cache");
+             var e11 = ses.Querion<Body>().Where(a => a.Description == "1233").Any();
+             var e21 = ses.Querion<Body>().OverCache().Where(a => a.Description == "1233").Any();
+             ses.WriteLogFile("cache");
+             var e31 = ses.Querion<Body>().Where(a => a.Description == "123333333").Any();
+
+             Clear(ses);
+             ses.Dispose();
+             PrintSecondGround(ses, "TestAny");
+             Assert.True(e1&& e2 &&e3==false&&e11&&e21&&e31==false);
+
+         }
+
 
         void Clear(ISession ses)
         {
