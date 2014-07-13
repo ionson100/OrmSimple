@@ -33,6 +33,7 @@ namespace ExampleOrmMySql
             var ses = Configure.GetSessionCore();
 
             ses.Save(new Body());
+            var adffff = ses.Querion<Body>().Last().Description;
             var ererrrrr = ses.Querion<Body>().Last().Description;
 
             var p1 = new ParameterStoredPr("p1", "qwqwqw", ParameterDirection.Input);

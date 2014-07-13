@@ -21,9 +21,12 @@ namespace ExampleOrm
             var ses = Configure.GetSessionCore();
 
 
-            var ererrrrr = ses.Querion<Body>().Last().Description;
+            var eretzxzxrrrr = ses.Querion<Body>().First(a => a.Description == "4").Description;
+            var ereetrrrrr = ses.Querion<Body>().FirstOrDefault(a => a.Description == "-4");
+            var erezxzxrrrr = ses.Querion<Body>().Last(a=>a.Description=="4").Description;
+            var ererrrrr = ses.Querion<Body>().LastOrDefault(a => a.Description == "-4");
             var r323we = ses.Querion<Body>().ToList().Count();
-            var r323 = ses.Querion<Body>().ToList().Count();
+            var r323 = ses.Querion<Body>().ToList();
             var r3233 = ses.Querion<Body>().OverCache().ToList().Count();
             var eeex = ses.Querion<Body>().First();
             var erererre = ses.Querion<Telephone>().Where(a => a.IdTel > 0).Select(a => new { sd = a.Description }).Limit(0, 20).ToList();

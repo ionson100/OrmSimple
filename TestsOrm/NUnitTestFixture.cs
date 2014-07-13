@@ -393,6 +393,51 @@ namespace TestsOrm
 
         }
 
+        [Test]
+        public void TestLastAndLastOrDefault()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestLastAndLastOrDefault");
+            Clear(ses);
+
+            var b = new Body { Description = "1233" };
+            ses.Save(b);
+            var b1 = new Body { Description = "12332" };
+            ses.Save(b1);
+
+            var e1 = ses.Querion<Body>().LastOrDefault(a => a.Description == "1233");
+            var e2 = ses.Querion<Body>().OverCache().Last(a => a.Description == "1233");
+            var e3 = ses.Querion<Body>().LastOrDefault(a => a.Description == "123333333");
+
+            Clear(ses);
+            ses.Dispose();
+            PrintSecondGround(ses, "TestLastAndLastOrDefault");
+            Assert.True(e1.Description == e2.Description && e3 == null);
+
+        }
+         [Test]
+        public void TestFirstAndFirstOrDefault()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestFirstAndFirstOrDefault");
+            Clear(ses);
+            var b1 = new Body { Description = "12332" };
+            ses.Save(b1);
+            var b = new Body { Description = "1233" };
+            ses.Save(b);
+
+
+            var e1 = ses.Querion<Body>().FirstOrDefault(a => a.Description == "1233");
+            var e2 = ses.Querion<Body>().OverCache().First(a => a.Description == "1233");
+            var e3 = ses.Querion<Body>().FirstOrDefault(a => a.Description == "123333333");
+
+            Clear(ses);
+            ses.Dispose();
+            PrintSecondGround(ses, "TestFirstAndFirstOrDefault");
+            Assert.True(e1.Description == e2.Description && e3 == null);
+
+        }
+
 
         void Clear(ISession ses)
         {
