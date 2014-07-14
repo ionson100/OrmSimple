@@ -86,6 +86,7 @@ namespace TestsOrm
         [Test]
         public void TestInterface()
         {
+            //может глючить из за разны
             var ses = Configure.GetSessionCore();
             Clear(ses);
             var body = new Body();
@@ -93,9 +94,14 @@ namespace TestsOrm
             body.Description = "sasda";
             ses.Save(body);
             ses.Delete(body);
-            var count = ses.Querion<Body>().Count();
+            var count = ses.Querion<Body>().Count(s=>s.Id==body.Id);
             Clear(ses);
             ses.Dispose();
+            Debug.WriteLine("body.IsDelete-" + body.IsDelete);
+            Debug.WriteLine("body.IsInsert-" + body.IsInsert);
+            Debug.WriteLine("body.IsDelete-" + body.IsDelete);
+            Debug.WriteLine("count-"+count);
+
             Assert.True(body.IsDelete && body.IsInsert && body.IsDelete && count == 0);
         }
 
@@ -455,7 +461,7 @@ namespace TestsOrm
              var e3 = ses.Querion<Body>().Any(a => a.Description == "123333333");
 
              ses.WriteLogFile("cache");
-             var e11 = ses.Querion<Body>().Where(a => a.Description == "1233").Any();
+             var e11 = ses.Querion<Body>().Where(a => a.Description == "1233").Select(d=>d.Description).AsEnumerable().Any();
              var e21 = ses.Querion<Body>().OverCache().Where(a => a.Description == "1233").Any();
              ses.WriteLogFile("cache");
              var e31 = ses.Querion<Body>().Where(a => a.Description == "123333333").Any();
@@ -467,8 +473,133 @@ namespace TestsOrm
 
          }
 
+         [Test]
+         public void TestOrderByDescending()
+         {
+             var ses = Configure.GetSessionCore();
+             PrintFirstGround(ses, "TestOrderByDescending");
+             Clear(ses);
+             var b1 = new Body { Description = "1" };
+             ses.Save(b1);
+             var b = new Body { Description = "2" };
+             ses.Save(b);
+            var list= ses.Querion<Body>().OrderByDescending(body => body.Id).ToList();
+            bool e1 = list[0].Id > list[1].Id;
+            var list1 = ses.Querion<Body>().OrderByDescending(body => body.Description).ToList();
+            bool e2 = list1[0].Description=="2"&&list1[1].Description=="1";
+           // var list2 = ses.Querion<Body>().OrderByDescending(a=>a.Id,new Comparers()) //не работает
+             Clear(ses);
+             ses.Dispose();
+             PrintSecondGround(ses, "TestOrderByDescending");
+             Assert.True(e1&&e2);
 
-        void Clear(ISession ses)
+         }
+
+         [Test]
+         public void TestOrderBy()
+         {
+             var ses = Configure.GetSessionCore();
+             
+             PrintFirstGround(ses, "TestOrderBy");
+             Clear(ses);
+             var b1 = new Body { Description = "1" };
+             ses.Save(b1);
+             var b = new Body { Description = "2" };
+             ses.Save(b);
+             var list = ses.Querion<Body>().OrderByDescending(body => body.Id).ThenBy(c=>c.Description).ToList();
+             bool e1 = list[0].Id > list[1].Id;
+             var list1 = ses.Querion<Body>().OrderBy(body => body.Id).ToList();
+             bool e2 = list1[0].Description == "1" && list1[1].Description == "2";
+             // var list2 = ses.Querion<Body>().OrderByDescending(a=>a.Id,new Comparers()) //не работает
+             Clear(ses);
+             ses.Dispose();
+             PrintSecondGround(ses, "TestOrderBy");
+             Assert.True(e1 && e2);
+
+         }
+         [Test]
+         public void TestClearCache()
+         {
+             //смотреть лог
+             var ses = Configure.GetSessionCore();
+            
+             PrintFirstGround(ses, "TestClearCache");
+             Clear(ses);
+             var b1 = new Body { Description = "1" };
+             ses.Save(b1);
+             var b = new Body { Description = "2" };
+             ses.Save(b);
+             ses.WriteLogFile("base");
+             var list = ses.Querion<Body>().OrderByDescending(body => body.Id).ThenBy(c => c.Description).ToList();
+             ses.WriteLogFile("cache");
+             var list1 = ses.Querion<Body>().OrderByDescending(body => body.Id).ThenBy(c => c.Description).ToList();
+
+             var ses1 = Configure.GetSessionCore();
+             ses.WriteLogFile("cache");
+             var list2 = ses1.Querion<Body>().OrderByDescending(body => body.Id).ThenBy(c => c.Description).ToList();
+             ses.ClearCache<Body>();
+             ses.WriteLogFile("base");
+             var ses2 = Configure.GetSessionCore();
+             var list3 = ses2.Querion<Body>().OrderByDescending(body => body.Id).ThenBy(c => c.Description).ToList();
+             
+             Clear(ses);
+             ses.Dispose();
+             ses1.Dispose();
+             ses2.Dispose();
+             PrintSecondGround(ses, "TestClearCache");
+             Assert.True(true);
+
+         }
+         [Test]
+         public void TestSelectNew()
+         {
+             var ses = Configure.GetSessionCore();
+             PrintFirstGround(ses, "TestSelectNew");
+             Clear(ses);
+             var b1 = new Body { Description = "1" };
+             ses.Save(b1);
+             var b = new Body { Description = "2" };
+             ses.Save(b);
+         
+             var list =
+                 ses.Querion<Body>()
+                     .OrderByDescending(body => body.Id)
+                     .ThenBy(c => c.Description)
+                     .Select(d => d.Description)
+                     .ToList();
+       
+             var list1 = ses.Querion<Body>().Where(f=>f.Description!=null).OrderByDescending(body => body.Id).ThenBy(c => c.Description).Select(g=>new{g.Id,g.Description}).ToList();
+
+             Clear(ses);
+             ses.Dispose();
+         
+             PrintSecondGround(ses, "TestSelectNew");
+             Assert.True(list.Count==list1.Count);
+         }
+
+         [Test]
+         public void TestCount()
+         {
+             var ses = Configure.GetSessionCore();
+             PrintFirstGround(ses, "TestCount");
+             Clear(ses);
+             var b1 = new Body { Description = "1" };
+             ses.Save(b1);
+             var b = new Body { Description = "2" };
+             ses.Save(b);
+             var list = ses.Querion<Body>().Count();
+             var list1 = ses.Querion<Body>().Where(f => f.Description != null).Count();
+             var list2 = ses.Querion<Body>().Count(f => f.Description != null);
+             var list3 = ses.Querion<Body>().Count(f => f.Description == null);
+             Clear(ses);
+             ses.Dispose();
+             PrintSecondGround(ses, "TestCount");
+             Assert.True(list ==2&& list1==2&&list2==2&&list3==0);
+         }
+
+
+
+        static void Clear(ISession ses)
         {
             var list1 = ses.Querion<Body>().ToList();
             foreach (var c in list1)
@@ -477,18 +608,26 @@ namespace TestsOrm
             }
         }
 
-        void PrintFirstGround(ISession ses, string testName)
+        static void PrintFirstGround(ISession ses, string testName)
         {
             ses.WriteLogFile(string.Format("{1}старт тест {0} _______________________________________________ {1}", testName, Environment.NewLine));
         }
 
-        void PrintSecondGround(ISession ses, string testName)
+        static void PrintSecondGround(ISession ses, string testName)
         {
             ses.WriteLogFile(string.Format("{0}финиш тест {1} _______________________________________________ {0}", Environment.NewLine, testName));
         }
     }
 
+    class Comparers: IComparer<int>
+    {
 
+        public int Compare(int x, int y)
+        {
+            if (x > y) return 1;
+            return -1;
+        }
+    }
 
 
 
