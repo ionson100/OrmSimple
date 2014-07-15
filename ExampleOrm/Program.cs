@@ -177,7 +177,7 @@ namespace ExampleOrm
             var st1 = ses.Querion<Table>().Select(a => new { ss = a.Id }).ToList();
             var s2e = ses.Querion<Table>().ElementAt(1).Id;
             var s2 = ses.Querion<Table>().ElementAtOrDefault(0);
-            var dd = ses.Querion<Telephone>().Where(a => a.Description == "sdasdasd").SplitCore(3).ToList();
+            var dd = ses.Querion<Telephone>().Where(a => a.Description == "sdasdasd").SplitQueryable(3).ToList();
             var dd1 = ses.Querion<Telephone>().Where(a => a.Description != null).Split(3).ToList();
             var dd2 = ses.Querion<Telephone>().Where(a => a.Description != null).ToList().Split(2);
             var rev = ses.Querion<Telephone>().Where(a => a.Description == null).OrderBy(s => s.IdBody).Reverse().ToList();

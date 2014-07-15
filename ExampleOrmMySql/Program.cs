@@ -20,6 +20,15 @@ namespace ExampleOrmMySql
             _sd = sd;
         }
     }
+    class Comparers : IComparer<int>
+    {
+
+        public int Compare(int x, int y)
+        {
+            if (x < y) return 1;
+            return -1;
+        }
+    }
     class Program
     {
         static void Main()
@@ -33,6 +42,9 @@ namespace ExampleOrmMySql
             var ses = Configure.GetSessionCore();
 
             ses.Save(new Body());
+          //  var rttt = ses.Querion<Body>().Select(a => a.Description).ToList();
+            var list2 = ses.Querion<Body>().OrderByDescending(a => a.Id, new Comparers()).ToList();
+            var e11 = ses.Querion<Body>().Where(a => a.Description == "1233").Select(d => d.Description).AsEnumerable().Any();
             var e1fdfd = ses.Querion<Body>().Any(a => a.Description == "1233");
             var e2dfdf = ses.Querion<Body>().OverCache().Any(a => a.Description == "1233");
             var e3sas = ses.Querion<Body>().Any(a => a.Description == "123333333");
@@ -255,7 +267,7 @@ namespace ExampleOrmMySql
             var s1 = ses.Querion<Table1>().Select(a => new { ss = a.Id }).ToList();
             var st1 = ses.Querion<Table1>().Select(a => new {  a.Id,a.Description }).ToList();
             var s2 = ses.Querion<Table1>().ElementAtOrDefault(4).Id;
-            var dd = ses.Querion<Telephone>().Where(a => a.Description == "sdasdasd").SplitCore(3).ToList();
+            var dd = ses.Querion<Telephone>().Where(a => a.Description == "sdasdasd").SplitQueryable(3).ToList();
             var dd1 = ses.Querion<Telephone>().Where(a => a.Description != null).Split(3).ToList();
             var dd2 = ses.Querion<Telephone>().Where(a => a.Description != null).ToList().Split(2);
             var rev = ses.Querion<Telephone>().Where(a => a.Description == null).OrderBy(s => s.IdBody).Reverse().ToList();
