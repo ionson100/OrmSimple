@@ -598,10 +598,10 @@ namespace TestsOrm
          }
 
          [Test]
-         public void TestSplitQueryable()
+         public void TestSplitCore()
          {
              var ses = Configure.GetSessionCore();
-             PrintFirstGround(ses, "TestSplitQueryable");
+             PrintFirstGround(ses, "SplitQueryable");
              Clear(ses);
              var b1 = new Body { Description = "1" };
              ses.Save(b1);
@@ -613,27 +613,9 @@ namespace TestsOrm
           
              Clear(ses);
              ses.Dispose();
-             PrintSecondGround(ses, "TestSplitQueryable");
+             PrintSecondGround(ses, "SplitQueryable");
+           
              Assert.True(list.Count() == 3 );
-         }
-
-         [Test]
-         public void TestSplitQugeryable()
-         {
-             var ses = Configure.GetSessionCore();
-             PrintFirstGround(ses, "TestSplitQueryable");
-             Clear(ses);
-             var b1 = new Body { Description = "1" };
-             ses.Save(b1);
-             var b = new Body { Description = "2" };
-             ses.Save(b);
-             var b2 = new Body { Description = "3" };
-             ses.Save(b2);
-             var list = ses.Querion<Body>().Where(a=>a.Description!=null).Limit(1, 2).ToList();
-             Clear(ses);
-             ses.Dispose();
-             PrintSecondGround(ses, "TestSplitQueryable");
-             Assert.True(list.Count() == 2&&list[0].Description=="2"&&list[1].Description=="3");
          }
 
 

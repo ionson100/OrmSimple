@@ -480,11 +480,15 @@
             Разбиение на массивы
             </summary>
             <param name="source"></param>
-            <param name="splitSize">количество массивов</param>
+            <param name="chunkLength">количество массивов</param>
             <typeparam name="T">Тип проекции таблицы</typeparam>
             <returns></returns>
         </member>
         <member name="M:ORM_1_21_.Helper.SplitQueryable``1(System.Linq.IQueryable{``0},System.Int32)">
+            <summary>
+            разбиение на массивы
+            </summary>
+            <param name="coll"></param>
             <param name="splitSize">количество массивов</param>
             <typeparam name="T">Тип проекции таблицы</typeparam>
             <returns></returns>
