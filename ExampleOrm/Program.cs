@@ -138,7 +138,7 @@ namespace ExampleOrm
             var t30 = ses.Querion<Telephone>().OrderByDescending(a => a.Description).ToList();//.First(d => d.Description == null);
             var t31 = ses.Querion<Telephone>().Last(d => d.Description == null);
             var t33 = ses.Querion<Telephone>().Single(a => a.Description == "sadsadsa");
-            var t34 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == "sadsadsa");
+        //    var t34 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == "sadsadsa");
             var t35 = ses.Querion<Telephone>().All(a => a.Description != null || a.Description == null);
             var t36 = ses.Querion<Telephone>().All(a => a.Description == "dsaas");
             var t37 = ses.Querion<Telephone>().All(a => a.Id < 60000000);
@@ -162,8 +162,8 @@ namespace ExampleOrm
 
             var t48 = ses.Querion<Telephone>().Where(a => a.Description != null).Min(a => a.Id);
             var t49 = ses.Querion<Telephone>().Where(s => s.Description == "ttttttttt").DistinctCore(a => a.Description);
-            var t50 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == null);
-            var t51 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description.Length == 10000);
+           // var t50 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == null);
+          //  var t51 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description.Length == 10000);
             var t52 = ses.Querion<Telephone>().Single(a => a.Description == null);
             var t53 = ses.Querion<Telephone>().Single(a => a.Description.Length == 10000);
             Func<Telephone, int> ddxx = telephone => (int)(telephone.IdTel * 100);

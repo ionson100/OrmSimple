@@ -12,27 +12,10 @@ using ORM_1_21_;
 namespace TestsOrm
 {
     [TestFixture]
-    public class NUnitTestFixture
+    public partial class NUnitTestFixture
     {
         Configure fg = new Configure("Server=localhost;Database=test;Uid=root;Pwd=;charset=utf8;Allow User Variables=True;", ProviderName.MySql, true, "E:/assa22.txt", true);
-        [Test]
-        public void TestImage()
-        {
-            var ses = Configure.GetSessionCore();
-            var f = new TestImage { Image = Image.FromFile("E:/1.jpg") };
-            ses.Save(f);
-            var rr = ses.Get<TestImage>(f.Id).Image != null;
-            Console.WriteLine(rr);
-            var list = ses.Querion<TestImage>().ToList();
-            foreach (var testImage in list)
-            {
-                ses.Delete(testImage);
-            }
-            var count = ses.Querion<TestImage>().Count();
-            ses.Dispose();
-            Assert.True(rr && count == 0);
-        }
-
+       
         [Test]
         public void TestCustomAttibute()
         {
@@ -206,21 +189,58 @@ namespace TestsOrm
         }
 
         [Test]
-        public void TestUpdate()
+        public void TestUpdateSimpe()
         {
             var ses = Configure.GetSessionCore();
-            PrintFirstGround(ses, "TestUpdate");
+            PrintFirstGround(ses, "TestUpdateSimpe");
             Clear(ses);
             ses.Save(new Body());
-            ses.Querion<Body>().Where(s => s.Description == null).Update(a => new Dictionary<object, object> { { a.Description, "312312" } });
+            ses.Querion<Body>().Where(s => s.Description == null).Update(a => new Dictionary<object, string> { { a.Description, "312312" } });
             var description = ses.Querion<Body>().First().Description;
             Clear(ses);
-            PrintSecondGround(ses, "TestUpdate");
+            PrintSecondGround(ses, "TestUpdateSimpe");
             ses.Dispose();
             Assert.True(description == "312312");
         }
 
-        [Test]
+         [Test]
+        public void TestUpdatComplexe()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestUpdatComplex");
+             foreach (var image in ses.Querion<TestImage>())
+             {
+                 ses.Delete(image);
+             }
+             foreach (var df in ses.Querion<TestCustom>())
+             {
+                 ses.Delete(df);
+             }
+            ses.Save(new TestCustom());
+            ses.Save(new TestImage());
+            ses.Querion<TestCustom>().Where(s => s.Class == null).Update(a => new Dictionary<object, byte[]> { { a.Class, Utils.ObjectToByteArray(new MyClass())} });
+            ses.Querion<TestImage>().Where(s => s.Image == null).Update(a => new Dictionary<object, byte[]> { { a.Image, Utils.ImageToByte(Image.FromFile("E:/1.jpg") )}});
+            var v = ses.Querion<TestCustom>().First();
+            var v1 = ses.Querion<TestImage>().First();
+            ses.Delete(v);
+            Clear(ses);
+            PrintSecondGround(ses, "TestUpdatComplex");
+            foreach (var image in ses.Querion<TestImage>())
+            {
+                ses.Delete(image);
+            }
+            foreach (var df in ses.Querion<TestCustom>())
+            {
+                ses.Delete(df);
+            }
+            ses.Dispose();
+            Assert.True(v.Class != null&&v1.Image!=null);
+        }
+
+
+
+
+         [Test]
         public void TestDelete()
         {
             var ses = Configure.GetSessionCore();
