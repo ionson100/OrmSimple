@@ -252,7 +252,7 @@ namespace TestsOrm
         public void TestPosledAnonymus()
         {
             var ses = Configure.GetSessionCore();
-            PrintFirstGround(ses, "TestRevers");
+            PrintFirstGround(ses, "TestPosledAnonymus");
             Clear(ses);
             var body = new Body { Description = "12" };
             ses.Save(body);
@@ -291,7 +291,7 @@ namespace TestsOrm
             var dd12 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).LastOrDefault();
 
             Clear(ses);
-            PrintSecondGround(ses, "TestRevers");
+            PrintSecondGround(ses, "TestPosledAnonymus");
             ses.Dispose();
             Assert.True(dd1!=null&&dd2==null&&dd3!=null&&dd4!=null&&dd5==null&&dd6!=null&&dd7!=null&&dd8==null&&dd9!=null&&dd10!=null&&dd11==null&&dd12!=null);
         }
