@@ -341,7 +341,7 @@
         </member>
         <member name="M:ORM_1_21_.Helper.GroupByCore``2(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
             <summary>
-            Группировка по полю
+            Группировка по полю. возвращает объекты в ключе нативного sql запроса
             </summary>
             <param name="coll"></param>
             <param name="key"></param>
@@ -388,7 +388,7 @@
         </member>
         <member name="M:ORM_1_21_.Helper.Limit``1(System.Linq.IQueryable{``0},System.Int32,System.Int32)">
             <summary>
-            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции с учетом нуля, количество в выборке)
             </summary>
             <param name="coll"></param>
             <param name="start">Начало позиции</param>
@@ -398,7 +398,7 @@
         </member>
         <member name="M:ORM_1_21_.Helper.Limit(System.Linq.IQueryable{System.Decimal},System.Int32,System.Int32)">
             <summary>
-            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции с учетом нуля, количество в выборке)
             </summary>
             <param name="coll"></param>
             <param name="start">Начало позиции</param>
@@ -407,7 +407,7 @@
         </member>
         <member name="M:ORM_1_21_.Helper.Limit(System.Linq.IQueryable{System.Single},System.Int32,System.Int32)">
             <summary>
-            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции, количество в выборке)
+            LIMIT всегда ставится в конце предложения LIMIT ( начало позиции с учетом нуля, количество в выборке)
             </summary>
             <param name="coll"></param>
             <param name="start">Начало позиции</param>
