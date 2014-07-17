@@ -1210,6 +1210,31 @@
              Утилиты
             </summary>
         </member>
+        <member name="M:ORM_1_21_.Utils.GetValue``1(``0,System.String)">
+            <summary>
+            Получение значения публичного свойства объекта
+            </summary>
+            <param name="item">Экземпляр объекта, из которого хочем получить значение публичного чвойства</param>
+            <param name="propertyName">Название публичного свойства</param>
+            <typeparam name="T">Тип объекта</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:ORM_1_21_.Utils.SetValue``1(``0,System.String,System.Object)">
+            <summary>
+            Инициализаци публичного свойства объекта
+            </summary>
+            <param name="item">Экземпляр объекта, чьё свойство инициализируем</param>
+            <param name="propertyName">Название звойства</param>
+            <param name="value">Тип объекта</param>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:ORM_1_21_.Utils.IsAnonymousType(System.Type)">
+            <summary>
+            Определяем, является ли тип анонимным
+            </summary>
+            <param name="type">Тип для исследования</param>
+            <returns>bool</returns>
+        </member>
         <member name="M:ORM_1_21_.Utils.ObjectToByteArray(System.Object)">
             <summary>
             Сериализация  объекта

@@ -40,6 +40,10 @@ namespace ExampleOrmMySql
 
 
             var ses = Configure.GetSessionCore();
+            foreach (var VARIABLE in ses.Querion<Body>())
+            {
+                ses.Delete(VARIABLE);
+            }
 
             var bodye = new Body { Description = "12" };
             ses.Save(bodye);
@@ -47,22 +51,25 @@ namespace ExampleOrmMySql
             ses.Save(body2);
             var body12 = new Body { Description = "13" };
             ses.Save(body12);
-          //  Single
+            var body122 = new Body();
+            ses.Save(body122);
 
 
            
             var dd133 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).First();
+
+            var ddfd3 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).ElementAtOrDefault(0);
            
             var dd3 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).First();
             var dd4 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).FirstOrDefault();
-            var dd5 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).FirstOrDefault();
+          //  var dd5 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).FirstOrDefault();
             var dd6 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).FirstOrDefault();
             var dd7 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).Last();
             
            
             var dd9 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).Last();
             var dd10 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).LastOrDefault();
-            var dd11 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).LastOrDefault();
+           // var dd11 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).LastOrDefault();
             var dd12 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).LastOrDefault();
 
 

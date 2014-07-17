@@ -117,14 +117,14 @@ namespace TestsOrm
             var dd1 = ses.Querion<Body>().Where(a => a.Description == null).ElementAt(1);
             try
             {
-              dd2 = ses.Querion<Body>().Where(a => a.Description == null).ElementAt(3);
+                dd2 = ses.Querion<Body>().Where(a => a.Description == null).ElementAt(3);
             }
-            catch 
+            catch
             {
-                
-               
+
+
             }
-         
+
             var dd3 = ses.Querion<Body>().Where(a => a.Description == "12").ElementAt(0);
             Clear(ses);
             PrintSecondGround(ses, "TestElementAt");
@@ -232,6 +232,15 @@ namespace TestsOrm
         }
 
         [Test]
+        public void TestGetSetProperties()
+        {
+            var body = new Body();
+            var res1 = Utils.GetValue(body, "Description");
+            Utils.SetValue(body, "Description", "123");
+            Assert.True(res1 == null && body.Description == "123");
+        }
+
+        [Test]
         public void TestRevers()
         {
             var ses = Configure.GetSessionCore();
@@ -277,7 +286,7 @@ namespace TestsOrm
             var dd1 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).First();
             try
             {
-                 dd2 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).First();
+                dd2 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).First();
             }
             catch
             {
@@ -291,7 +300,7 @@ namespace TestsOrm
             object dd8 = null;
             try
             {
-                 dd8 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).Last();
+                dd8 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).Last();
             }
             catch (Exception)
             {
@@ -304,7 +313,7 @@ namespace TestsOrm
             Clear(ses);
             PrintSecondGround(ses, "TestPosledAnonymus");
             ses.Dispose();
-            Assert.True(dd1!=null&&dd2==null&&dd3!=null&&dd4!=null&&dd5==null&&dd6!=null&&dd7!=null&&dd8==null&&dd9!=null&&dd10!=null&&dd11==null&&dd12!=null);
+            Assert.True(dd1 != null && dd2 == null && dd3 != null && dd4 != null && dd5 == null && dd6 != null && dd7 != null && dd8 == null && dd9 != null && dd10 != null && dd11 == null && dd12 != null);
         }
 
 
