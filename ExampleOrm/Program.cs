@@ -35,7 +35,7 @@ namespace ExampleOrm
             var r323we = ses.Querion<Body>().ToList().Count();
             var r323 = ses.Querion<Body>().ToList();
             var r3233 = ses.Querion<Body>().OverCache().ToList().Count();
-            var eeex = ses.Querion<Body>().First();
+            var eeex = ses.Querion<Body>().FirstOrDefault();
             var erererre = ses.Querion<Telephone>().Where(a => a.IdTel > 0).Select(a => new { sd = a.Description }).Limit(0, 20).ToList();
             var sdwswawwdas = ses.FreeSqlParam<object>("select description from body where id >@p1", new Parameter("p1", 0));
             var sdsqwwwawwdas = ses.FreeSqlParam<Body>("select * from body where id >@p1", new Parameter("p1", 0));
@@ -68,9 +68,9 @@ namespace ExampleOrm
             ses.Querion<Body>().Where(a => a.Id > 0).Update(a => new Dictionary<object, object> { { a.Description, "dasdasdasdasd" } });
             ses.Querion<Body>().Update(a => new Dictionary<object, object> { { a.Description, "dasdasdasdasd" } });
 
-            var t2ewe7 = ses.Querion<Telephone>().OverCache().OrderBy(w => w.Description).Last(s => s.Description != null);
-            var twewe28 = ses.Querion<Telephone>().OrderBy(a => a.Description).Last(a => a.Description != null);
-            var sssssww = ses.GetList<Table1>().First();
+            var t2ewe7 = ses.Querion<Telephone>().OverCache().OrderBy(w => w.Description).LastOrDefault(s => s.Description != null);
+            var twewe28 = ses.Querion<Telephone>().OrderBy(a => a.Description).LastOrDefault(a => a.Description != null);
+            var sssssww = ses.GetList<Table1>().FirstOrDefault();
             sssssww.Description = "dddddddd2222222222";
             //using (var d = new TransactionScope())
             //{
@@ -85,7 +85,7 @@ namespace ExampleOrm
             var eeZxeeee = ses.Querion<Table1>().OverCache().Where(a => a.Id > 0).Select(a => Math.Round(a.IdBodya, 6)).Limit(0, 10).ToList();
             var trans = ses.BeginTransaction();
             var t1 = ses.GetList<Body>();
-            var t1a2 = ses.GetList<Body>(" id < 4000000").First();
+            var t1a2 = ses.GetList<Body>(" id < 4000000").FirstOrDefault();
             t1a2.Name = DateTime.Now.ToString(CultureInfo.InvariantCulture);
             ses.Save(t1a2);
             var t2 = ses.GetList<Body>(" id < 4000000");
@@ -121,7 +121,7 @@ namespace ExampleOrm
             var tdd = new Telephone() { Datet = DateTime.Now.AddDays(-3) };
             ses.Save(tdd);
 
-            var eex = ses.Querion<Telephone>().First();
+            var eex = ses.Querion<Telephone>().FirstOrDefault();
             eex.Description = "ion";
             var ssssss = new Table1() { Datet = DateTime.Now };
             ses.Save((Body)eex);
@@ -132,11 +132,11 @@ namespace ExampleOrm
                    .Where(d => d.Id > 12)
                    .Select(s => new { d = s.Id, ff = s.Description })
                    .ToList();
-            var t27 = ses.Querion<Telephone>().OrderBy(w => w.Description).Last(s => s.Description != null);
-            var t28 = ses.Querion<Telephone>().OrderBy(a => a.Description).Last(a => a.Description != null);
-            var t29 = ses.Querion<Telephone>().OrderBy(a => a.Description).First(a => a.Description != null);
+            var t27 = ses.Querion<Telephone>().OrderBy(w => w.Description).LastOrDefault(s => s.Description != null);
+            var t28 = ses.Querion<Telephone>().OrderBy(a => a.Description).LastOrDefault(a => a.Description != null);
+            var t29 = ses.Querion<Telephone>().OrderBy(a => a.Description).FirstOrDefault(a => a.Description != null);
             var t30 = ses.Querion<Telephone>().OrderByDescending(a => a.Description).ToList();//.First(d => d.Description == null);
-            var t31 = ses.Querion<Telephone>().Last(d => d.Description == null);
+            var t31 = ses.Querion<Telephone>().LastOrDefault(d => d.Description == null);
             var t33 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == "sadsadsa");
         //    var t34 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == "sadsadsa");
             var t35 = ses.Querion<Telephone>().All(a => a.Description != null || a.Description == null);
@@ -170,12 +170,12 @@ namespace ExampleOrm
             var sd = ses.GetList<Table>().ToList();
             var dds = new Table { Id = new Random().Next(2000000000) };
             ses.Save(dds);
-            var ssa = ses.Querion<Table>().First();
+            var ssa = ses.Querion<Table>().FirstOrDefault();
             ssa.Name = "asdasd";
             ses.Querion<Table>().SaveOrUpdate(ssa);
             var s1 = ses.Querion<Table>().Select(a => new { ss = a.Id }).ToList();
             var st1 = ses.Querion<Table>().Select(a => new { ss = a.Id }).ToList();
-            var s2e = ses.Querion<Table>().ElementAt(1).Id;
+            var s2e = ses.Querion<Table>().ElementAtOrDefault(1).Id;
             var s2 = ses.Querion<Table>().ElementAtOrDefault(0);
             var dd = ses.Querion<Telephone>().Where(a => a.Description == "sdasdasd").SplitQueryable(3).ToList();
             var dd1 = ses.Querion<Telephone>().Where(a => a.Description != null).Split(3).ToList();
@@ -189,11 +189,11 @@ namespace ExampleOrm
             var order1 =
                 ses.Querion<Telephone>()
                    .Where(a => a.Description != null).OrderBy(a => a.Description).ThenByDescending(a => a.IdBody)
-                   .Last(a => a.Id < 2);
+                   .LastOrDefault(a => a.Id < 2);
             var order3 =
                ses.Querion<Telephone>()
                   .Where(a => a.Description != null).OrderBy(a => a.Description).ThenByDescending(a => a.IdBody)
-                  .First(a => a.Id < 2);
+                  .FirstOrDefault(a => a.Id < 2);
             var order4 =
                 ses.Querion<Telephone>()
                    .Where(a => a.Description != null).OrderBy(a => a.Description).ThenByDescending(a => a.IdBody)

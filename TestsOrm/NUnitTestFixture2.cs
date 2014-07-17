@@ -113,8 +113,18 @@ namespace TestsOrm
             ses.Save(body2);
             var body12 = new Body();
             ses.Save(body12);
+            Body dd2 = null;
             var dd1 = ses.Querion<Body>().Where(a => a.Description == null).ElementAt(1);
-            var dd2 = ses.Querion<Body>().Where(a => a.Description == null).ElementAt(3);
+            try
+            {
+              dd2 = ses.Querion<Body>().Where(a => a.Description == null).ElementAt(3);
+            }
+            catch 
+            {
+                
+               
+            }
+         
             var dd3 = ses.Querion<Body>().Where(a => a.Description == "12").ElementAt(0);
             Clear(ses);
             PrintSecondGround(ses, "TestElementAt");
@@ -277,6 +287,7 @@ namespace TestsOrm
             var dd5 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).FirstOrDefault();
             var dd6 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).FirstOrDefault();
             var dd7 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).Last();
+            ses.WriteLogFile("7");
             object dd8 = null;
             try
             {
@@ -289,7 +300,7 @@ namespace TestsOrm
             var dd10 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).LastOrDefault();
             var dd11 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).LastOrDefault();
             var dd12 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).LastOrDefault();
-
+            ses.WriteLogFile("12");
             Clear(ses);
             PrintSecondGround(ses, "TestPosledAnonymus");
             ses.Dispose();

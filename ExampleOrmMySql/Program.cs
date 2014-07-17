@@ -50,29 +50,17 @@ namespace ExampleOrmMySql
           //  Single
 
 
-            //object dd233 = null;
-            //var dd133 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).First();
-            //try
-            //{
-            //    dd233 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).First();
-            //}
-            //catch
-            //{
-            //}
-         //   var dd3 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).First();
-            //var dd4 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).FirstOrDefault();
-            //var dd5 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).FirstOrDefault();
-            //var dd6 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).FirstOrDefault();
-            //var dd7 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).Last();
-            //object dd8 = null;
-            //try
-            //{
-            //    dd8 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).Last();
-            //}
-            //catch (Exception)
-            //{
-            //}
-          //  var dd9 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).Last();
+           
+            var dd133 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).First();
+           
+            var dd3 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).First();
+            var dd4 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).FirstOrDefault();
+            var dd5 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).FirstOrDefault();
+            var dd6 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).FirstOrDefault();
+            var dd7 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).Last();
+            
+           
+            var dd9 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).Last();
             var dd10 = ses.Querion<Body>().Where(a => a.Description != null).Select(a => new { a.Description }).LastOrDefault();
             var dd11 = ses.Querion<Body>().Where(a => a.Description == "1").Select(a => new { a.Description }).LastOrDefault();
             var dd12 = ses.Querion<Body>().Where(a => a.Description == null).Select(a => new { a.Description }).LastOrDefault();
@@ -83,7 +71,7 @@ namespace ExampleOrmMySql
 
             var dd1sdewm = ses.Querion<Body>().Where(a => a.Description != null).GroupBy(a => a.Description).ToList();
             var dd1ewm =
-                ses.Querion<Body>().Where(a => a.Description != null).Select(d => new {d.Id, d.Description}).ToList();
+                ses.Querion<Body>().Where(a => a.Description != null).Select(d => new {d.Description, d.Id}).ToList();
 
             var dd1rwter = ses.Querion<Body>().Where(a => a.Description == null).ElementAtOrDefault(1);
             var dd2trthtrh = ses.Querion<Body>().Where(a => a.Description == null).ElementAtOrDefault(3);
@@ -96,11 +84,11 @@ namespace ExampleOrmMySql
 
 
 
-           /// var rtpos = ses.Querion<Body>().Where(a => a.Description == null).SingleOrDefault();
+            /// var rtpos = ses.Querion<Body>().Where(a => a.Description == null).SingleOrDefault();
 
 
-          //  var dddffg1 = ses.Querion<Body>().Where(a => a.Description == "12").SingleOrDefault().Description;
-          //  var dddffg = ses.Querion<Body>().Where(a => a.Description == "12").SingleOrDefault().Description;
+            //  var dddffg1 = ses.Querion<Body>().Where(a => a.Description == "12").SingleOrDefault().Description;
+            //  var dddffg = ses.Querion<Body>().Where(a => a.Description == "12").SingleOrDefault().Description;
 
             ses.Save(new Body());
             ses.Querion<Body>().Where(s => s.Description == null).Update(a => new Dictionary<object, object> { { a.Description, "312312" } });
@@ -118,13 +106,13 @@ namespace ExampleOrmMySql
 
             var p1 = new ParameterStoredPr("p1", "qwqwqw", ParameterDirection.Input);
             var p2 = new ParameterStoredPr("p2", 2, ParameterDirection.Output);
-            var res = ses.ProcedureCallParam<Body>( "Assa2;", p1, p2).ToList();
+            var res = ses.ProcedureCallParam<Body>("Assa2;", p1, p2).ToList();
 
 
 
             var ss1 = ses.Querion<Telephone>().Select(a => new { a.Name }).DistinctCore(d => d.Name).ToList();
-           
-            
+
+
             //var lasrtion = ses.Querion<Telephone>().Select(a => new { a.Description, a.Id }).
             //    Join(ses.Querion<Table1>(), d => d.Id, f => f.Id, (g, h) => new { g.Description, h.Id });
 
@@ -201,16 +189,16 @@ namespace ExampleOrmMySql
             var eewwqwewe =
                ses.Querion<Telephone>().Where(a => a.Description != null).GroupByCore(a => a.Name).Select(a => new { a.Name }).ToList();
             var eewwqwaSewe =
-               ses.Querion<Telephone>().Where(a => a.Description != null).GroupByCore(a => a.Name, a => a.Description).ToList();
+               ses.Querion<Telephone>().OverCache().Where(a => a.Description != null).GroupByCore(a => a.Name, a => a.Description).ToList();
             var sdwqwfdfwwsd = ses.Querion<Telephone>().Where(a => a.Description != null).GroupByCore(a => a.Name).ToList();
-            var sdsd = ses.Querion<Telephone>().First(a => a.Id < 0);
+            var sdsd = ses.Querion<Telephone>().FirstOrDefault(a => a.Id < 0);
             var sdwsd = ses.Querion<Telephone>().FirstOrDefault(a => a.Id < 0);
-            var sqwfdsd = ses.Querion<Telephone>().Last(a => a.Id < 0);
+            var sqwfdsd = ses.Querion<Telephone>().LastOrDefault(a => a.Id < 0);
             var sdfwqwwsd = ses.Querion<Telephone>().LastOrDefault(a => a.Id < 0);
             //var sqwffdsd = ses.Querion<Telephone>().SingleOrDefault(a => a.Id < 0);
            // var sdwqfdfwwsd = ses.Querion<Telephone>().Single(a => a.Id < 0);
 
-            var e1 = ses.Querion<Telephone>().OverCache().First();
+            var e1 = ses.Querion<Telephone>().OverCache().FirstOrDefault();
             var tr = ses.BeginTransaction();
 
             try
@@ -252,7 +240,7 @@ namespace ExampleOrmMySql
             ses.Save(b);
             b.Description = "asdasdasd";
             ses.Save(b);
-            var dsdd = ses.GetList<Telephone>().First();
+            var dsdd = ses.GetList<Telephone>().FirstOrDefault();
             dsdd.Description = "ion100";
             dsdd.Datet = DateTime.Now;
             dsdd.Name = "ion100";
@@ -283,12 +271,12 @@ namespace ExampleOrmMySql
                    .Where(d => d.Id > 12)
                    .Select(s => new { d = s.Id, ff = s.Description })
                    .ToList();
-            var t27 = ses.Querion<Telephone>().OrderBy(w => w.Description).ThenBy(s => s.IdTelephone).Last(s => s.Description != null);
-            var t28 = ses.Querion<Telephone>().OrderBy(a => a.Description == null && a.Description == "asad").Last(a => a.Description != null);
-            var t29 = ses.Querion<Telephone>().OrderBy(a => a.Description == null && a.Description == "asad").First(a => a.Description != null);
-            var t30 = ses.Querion<Telephone>().OrderByDescending(a => a.Description).ToList().First(d => d.Description == null);
+            var t27 = ses.Querion<Telephone>().OrderBy(w => w.Description).ThenBy(s => s.IdTelephone).LastOrDefault(s => s.Description != null);
+            var t28 = ses.Querion<Telephone>().OrderBy(a => a.Description == null && a.Description == "asad").LastOrDefault(a => a.Description != null);
+            var t29 = ses.Querion<Telephone>().OrderBy(a => a.Description == null && a.Description == "asad").FirstOrDefault(a => a.Description != null);
+            var t30 = ses.Querion<Telephone>().OrderByDescending(a => a.Description).ToList().FirstOrDefault(d => d.Description == null);
             var t31 = ses.Querion<Telephone>().Last(d => d.Description == null);
-            var t32 = ses.Querion<Telephone>().OrderByDescending(a => a.Description).ToList().Last(d => d.Description == null);
+            var t32 = ses.Querion<Telephone>().OrderByDescending(a => a.Description).ToList().LastOrDefault(d => d.Description == null);
             //var t33 = ses.Querion<Telephone>().Single(a => a.Description == "sadsadsa");
             //var t34 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == "sadsadsa");
             var t35 = ses.Querion<Telephone>().All(a => a.Description != null || a.Description == null);
@@ -344,11 +332,11 @@ namespace ExampleOrmMySql
             var order1 =
                 ses.Querion<Telephone>()
                    .Where(a => a.Description != null).OrderBy(a => a.Description).ThenByDescending(a => a.IdBody)
-                   .Last(a => a.Id < 2);
+                   .LastOrDefault(a => a.Id < 2);
             var order3 =
                ses.Querion<Telephone>()
                   .Where(a => a.Description != null).OrderBy(a => a.Description).ThenByDescending(a => a.IdBody)
-                  .First(a => a.Id < 2);
+                  .FirstOrDefault(a => a.Id < 2);
             var order4 =
                 ses.Querion<Telephone>()
                    .Where(a => a.Description != null).OrderBy(a => a.Description).ThenByDescending(a => a.IdBody)
