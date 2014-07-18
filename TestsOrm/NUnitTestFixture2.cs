@@ -316,6 +316,32 @@ namespace TestsOrm
             Assert.True(dd1 != null && dd2 == null && dd3 != null && dd4 != null && dd5 == null && dd6 != null && dd7 != null && dd8 == null && dd9 != null && dd10 != null && dd11 == null && dd12 != null);
         }
 
+        [Test]
+        public void TestAll()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestAll");
+            Clear(ses);
+            var body = new Body { Description = "12" };
+            ses.Save(body);
+            var body2 = new Body { Description = "12" };
+            ses.Save(body2);
+            var body12 = new Body { Description = "13" };
+            ses.Save(body12);
+
+            var body121 = new Body();
+            ses.Save(body121);
+
+            var aa = ses.Querion<Body>().All(a => a.Description != null);
+            var bb = ses.Querion<Body>().Where(c=>c.Description== null).All(a => a.Description == "12");
+          
+           
+            Clear(ses);
+            PrintSecondGround(ses, "TestAll");
+            ses.Dispose();
+            Assert.True(aa&&!bb);
+        }
+
 
 
 

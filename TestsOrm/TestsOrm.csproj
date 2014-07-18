@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Body.cs" />
+    <Compile Include="Class1.cs" />
     <Compile Include="MyClass.cs" />
     <Compile Include="NUnitTestFixture.cs" />
     <Compile Include="NUnitTestFixture2.cs" />

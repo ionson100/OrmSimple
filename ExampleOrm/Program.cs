@@ -251,7 +251,7 @@ namespace ExampleOrm
             var ttt13 = ses.Querion<Telephone>().Select(s => Math.Atan2((double)s.IdBody, 34)).ToList();
             var ttt14 = ses.Querion<Telephone>().Select(s => Math.Cos((double)s.IdBody)).ToList();
             var ttt15 = ses.Querion<Telephone>().Select(s => Math.Exp(12) * (double)s.IdTel).ToList();
-            var ttt9wt3 = ses.Querion<Telephone>().Select(s => Math.Log10((double)s.IdBody)).ToList();
+          //  var ttt9wt3 = ses.Querion<Telephone>().Select(s => Math.Log10((double)s.IdBody)).ToList();
             var ttt92 = ses.Querion<Telephone>().Select(s => Math.Sign(s.IdBody)).ToList();
             var ttt93 = ses.Querion<Telephone>().Select(s => Math.Tan((double)s.IdBody)).ToList();
             var ttt49 = ses.Querion<Telephone>().Select(s => Math.Sqrt((double)s.IdBody)).ToList();

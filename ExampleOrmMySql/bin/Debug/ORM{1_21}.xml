@@ -330,6 +330,16 @@
             <param name="obj"></param>
             <typeparam name="T">сохраняемый или добавляемый обект в базу</typeparam>
         </member>
+        <member name="M:ORM_1_21_.Helper.FreeExpression``2(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression)">
+            <summary>
+            
+            </summary>
+            <param name="coll"></param>
+            <param name="expression"></param>
+            <typeparam name="T"></typeparam>
+            <typeparam name="TRes"></typeparam>
+            <returns></returns>
+        </member>
         <member name="M:ORM_1_21_.Helper.DistinctCore``1(System.Linq.IQueryable{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Object}})">
             <summary>
             
