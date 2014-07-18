@@ -55,7 +55,7 @@ namespace ExampleOrmMySql
                 ses.Save(b);
             }
 
-            var dffdfdd = ses.Querion<Body>().Where(a => a.Description == "12").Single();
+            var dffdfdd = ses.Querion<Body>().Where(a => a.Description == "12").SingleOrDefault();
             var drererrr = ses.Querion<Body>().First(a => a.Description != null);//разогрев
            
 
@@ -370,9 +370,9 @@ namespace ExampleOrmMySql
                    .FirstOrDefault(a => a.Id < 2);
 
             var lim = ses.Querion<Telephone>().Limit(1, 3).ToList();
-            var kk = ses.Querion<Telephone>().WhereFindLikeStartsWith(a => a.Description == "asas").ToList();
-            var kk1 = ses.Querion<Telephone>().WhereFindLikeEndsWith(a => a.Description == " asas").ToList();
-            var kk2 = ses.Querion<Telephone>().WhereFindLikeContains(a => a.Description == " asas").ToList();
+            var kk = ses.Querion<Telephone>().Where(a => a.Description == "asas").ToList();
+            var kk1 = ses.Querion<Telephone>().Where(a => a.Description == " asas").ToList();
+            var kk2 = ses.Querion<Telephone>().Where(a => a.Description == " asas").ToList();
 
             for (var i = 0; i < 5; i++)
             {
@@ -445,8 +445,8 @@ namespace ExampleOrmMySql
 
             var ser = ses.GetList(new Telephone(), "", false);
             var sdfer = ses.GetList(new Telephone(), "", true);
-            var kkaa = ses.Querion<Telephone>().WhereFindLikeStartsWith(a => a.Description == "asas").ToList();
-            var kk1a = ses.Querion<Telephone>().WhereFindLikeEndsWith(a => a.Description == " asas").ToList();
+            var kkaa = ses.Querion<Telephone>().Where(a => a.Description == "asas").ToList();
+            var kk1a = ses.Querion<Telephone>().Where(a => a.Description == " asas").ToList();
             var kk2a = ses.Querion<Telephone>().ToList();
 
             ses.Dispose();

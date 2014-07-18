@@ -27,7 +27,16 @@ namespace ExampleOrm
             ses.Save(body12);
             var body122 = new Body();
             ses.Save(body122);
-           // var aaghdgfh = ses.Querion<Body>().Contains(bodye);
+
+            var dd333 = ses.Querion<Body>().GroupBy(a => a.Description).Count();
+
+            var dewewed1 = ses.Querion<Body>().Where(a => a.Description == null).GroupBy(a => a.Description).ToList();
+            var dwewewed2 = ses.Querion<Body>().GroupBy(a => a.Description).ToList();
+
+
+            var aaghdgrerfh = ses.Querion<Body>().Limit(1,1).ToList();
+
+            var aaghdgfh = ses.Querion<Body>().ElementAtOrDefault(1);
 
             //var rtrttts = ses.Querion<Body>().Where(a => a.Description == null).Single();
 
