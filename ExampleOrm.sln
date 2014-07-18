@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsOrm", "TestsOrm\TestsO
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ORM{1_21}", "..\ORM{1_21}\ORM{1_21}.csproj", "{3D3C03BF-6EFE-4C92-9A91-FCEDA1823DC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestsOrmMsSql", "TestsOrmMsSql\TestsOrmMsSql.csproj", "{2F886848-7FE8-4EAD-8259-58453342082B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{3D3C03BF-6EFE-4C92-9A91-FCEDA1823DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D3C03BF-6EFE-4C92-9A91-FCEDA1823DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D3C03BF-6EFE-4C92-9A91-FCEDA1823DC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F886848-7FE8-4EAD-8259-58453342082B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F886848-7FE8-4EAD-8259-58453342082B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F886848-7FE8-4EAD-8259-58453342082B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F886848-7FE8-4EAD-8259-58453342082B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

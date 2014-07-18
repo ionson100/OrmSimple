@@ -15,6 +15,7 @@ namespace TestsOrm
     public partial class NUnitTestFixture
     {
         Configure fg = new Configure("Server=localhost;Database=test;Uid=root;Pwd=;charset=utf8;Allow User Variables=True;", ProviderName.MySql, true, "E:/assa22.txt", true);
+
        
         [Test]
         public void TestCustomAttibute()

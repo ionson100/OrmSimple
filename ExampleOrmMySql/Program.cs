@@ -49,7 +49,19 @@ namespace ExampleOrmMySql
                 ses.Delete(VARIABLE);
             }
 
+            for (var i = 0; i < 50; i++)
+            {
+                var b = new Body { Description = "dsdsdf" };
+                ses.Save(b);
+            }
 
+            var dffdfdd = ses.Querion<Body>().Where(a => a.Description == "12").Single();
+            var drererrr = ses.Querion<Body>().First(a => a.Description != null);//разогрев
+           
+
+            var list = ses.Querion<Body>().OverCache().Where(a => a.Description != null).ToArray();
+
+           
 
             var bodye = new Body { Description = "12" };
             ses.Save(bodye);
@@ -60,6 +72,7 @@ namespace ExampleOrmMySql
             var body122 = new Body();
             ses.Save(body122);
 
+            var afdsfa = ses.Querion<Body>().Contains(body2);
             var dd33 = ses.Querion<Body>().All(a => a.Description != null);
             var ddgh1 = ses.Querion<Body>().Where(c => c.Description ==null).All(a => a.Description == "12");
 
@@ -252,10 +265,8 @@ namespace ExampleOrmMySql
             var t5 = ses.GetListParam<Body>(" id >?p", 12);
             var T6 = ses.GetListParam<Body>(false, " id >?p", 12);
 
-            var b = new Body();
-            ses.Save(b);
-            b.Description = "asdasdasd";
-            ses.Save(b);
+          
+       
             var dsdd = ses.GetList<Telephone>().FirstOrDefault();
             dsdd.Description = "ion100";
             dsdd.Datet = DateTime.Now;
@@ -291,7 +302,7 @@ namespace ExampleOrmMySql
             var t28 = ses.Querion<Telephone>().OrderBy(a => a.Description == null && a.Description == "asad").LastOrDefault(a => a.Description != null);
             var t29 = ses.Querion<Telephone>().OrderBy(a => a.Description == null && a.Description == "asad").FirstOrDefault(a => a.Description != null);
             var t30 = ses.Querion<Telephone>().OrderByDescending(a => a.Description).ToList().FirstOrDefault(d => d.Description == null);
-            var t31 = ses.Querion<Telephone>().Last(d => d.Description == null);
+            var t31 = ses.Querion<Telephone>().Last(dd => dd.Description == null);
             var t32 = ses.Querion<Telephone>().OrderByDescending(a => a.Description).ToList().LastOrDefault(d => d.Description == null);
             //var t33 = ses.Querion<Telephone>().Single(a => a.Description == "sadsadsa");
             //var t34 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == "sadsadsa");
@@ -336,7 +347,7 @@ namespace ExampleOrmMySql
             var s1 = ses.Querion<Table1>().Select(a => new { ss = a.Id }).ToList();
             var st1 = ses.Querion<Table1>().Select(a => new { a.Id, a.Description }).ToList();
             var s2 = ses.Querion<Table1>().ElementAtOrDefault(4).Id;
-            var dd = ses.Querion<Telephone>().Where(a => a.Description == "sdasdasd").SplitQueryable(3).ToList();
+            var ddfgfg = ses.Querion<Telephone>().Where(a => a.Description == "sdasdasd").SplitQueryable(3).ToList();
             var dd1 = ses.Querion<Telephone>().Where(a => a.Description != null).Split(3).ToList();
             var dd2 = ses.Querion<Telephone>().Where(a => a.Description != null).ToList().Split(2);
             var rev = ses.Querion<Telephone>().Where(a => a.Description == null).OrderBy(s => s.IdBody).Reverse().ToList();

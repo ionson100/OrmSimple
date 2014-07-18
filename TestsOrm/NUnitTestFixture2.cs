@@ -342,6 +342,50 @@ namespace TestsOrm
             Assert.True(aa&&!bb);
         }
 
+        [Test]
+        public void TestLIKE()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestLIKE");
+            Clear(ses);
+            var body = new Body { Description = "12" };
+            ses.Save(body);
+            var body2 = new Body { Description = "12" };
+            ses.Save(body2);
+            var body12 = new Body { Description = "131" };
+            ses.Save(body12);
+            var body121 = new Body();
+            ses.Save(body121);
+            var aa = ses.Querion<Body>().Count(a => a.Description.StartsWith("1"));
+            var aa1 = ses.Querion<Body>().Count(a => a.Description.EndsWith("2"));
+            var aa2 = ses.Querion<Body>().Count(a => a.Description.Contains("3"));
+            Clear(ses);
+            PrintSecondGround(ses, "TestLIKE");
+            ses.Dispose();
+            Assert.True(aa==3 && aa1==2&&aa2==1);
+        }
+        [Test]
+        public void TestContains()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestContains");
+            Clear(ses);
+            var body = new Body { Description = "12" };
+            ses.Save(body);
+            var body2 = new Body { Description = "12" };
+            ses.Save(body2);
+            var body12 = new Body { Description = "131" };
+            ses.Save(body12);
+            var body121 = new Body();
+            ses.Save(body121);
+            var aa = ses.Querion<Body>().Contains(body);
+            Clear(ses);
+            PrintSecondGround(ses, "TestContains");
+            ses.Dispose();
+            Assert.True(aa);
+        }
+
+
 
 
 

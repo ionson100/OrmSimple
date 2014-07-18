@@ -19,10 +19,25 @@ namespace ExampleOrm
                 logFileName: "E:/assa22.txt",
                 usageCache: true);
             var ses = Configure.GetSessionCore();
+            var bodye = new Body { Description = "12" };
+            ses.Save(bodye);
+            var body2 = new Body { Description = "12" };
+            ses.Save(body2);
+            var body12 = new Body { Description = "133" };
+            ses.Save(body12);
+            var body122 = new Body();
+            ses.Save(body122);
+           // var aaghdgfh = ses.Querion<Body>().Contains(bodye);
 
-            var e1fdfd = ses.Querion<Body>().Any(a => a.Description == "4");
-            var e2dfdf = ses.Querion<Body>().OverCache().Any(a => a.Description == "1233");
-            var e3sas = ses.Querion<Body>().Any(a => a.Description == "123333333");
+            //var rtrttts = ses.Querion<Body>().Where(a => a.Description == null).Single();
+
+            //var aafgdfg = ses.Querion<Body>().Count(a => a.Description.StartsWith("1"));
+            //var aa1 = ses.Querion<Body>().Count(a => a.Description.EndsWith("2"));
+            //var aa2 = ses.Querion<Body>().Count(a => a.Description.Contains("3"));
+
+            //var e1fdfd = ses.Querion<Body>().Where(a=>a.Description!=null).Count();
+            //var e2dfdf = ses.Querion<Body>().OverCache().Any(a => a.Description == "1233");
+            //var e3sas = ses.Querion<Body>().Any(a => a.Description == "123333333");
 
             var eretzxzxeeerrrr =
                 ses.Querion<Body>().Where(s => s.Description == "-23-23").Select(g =>new{ g.Description}).ToList();
@@ -71,10 +86,10 @@ namespace ExampleOrm
             var t2ewe7 = ses.Querion<Telephone>().OverCache().OrderBy(w => w.Description).LastOrDefault(s => s.Description != null);
             var twewe28 = ses.Querion<Telephone>().OrderBy(a => a.Description).LastOrDefault(a => a.Description != null);
             var sssssww = ses.GetList<Table1>().FirstOrDefault();
-            sssssww.Description = "dddddddd2222222222";
+         //  sssssww.Description = "dddddddd2222222222";
             //using (var d = new TransactionScope())
             //{
-                ses.Save(sssssww);
+               // ses.Save(sssssww);
                 //  d.Complete();
             //}
 
@@ -202,9 +217,9 @@ namespace ExampleOrm
             //////////////////////////////var lim = ses.Querion<Telephone>().Limit(1, 3).ToList();
 
             var ion1 = ses.GetList(new Telephone(), "", true);
-            var kk = ses.Querion<Telephone>().WhereFindLikeStartsWith(a => a.Description == "asas").ToList();
-            var kk1 = ses.Querion<Telephone>().WhereFindLikeEndsWith(a => a.Description == " asas").ToList();
-            var kk2 = ses.Querion<Telephone>().WhereFindLikeContains(a => a.Description == " asas").ToList();
+            var kk = ses.Querion<Telephone>().Where(a => a.Description.StartsWith("d")).ToList();
+            var kk1 = ses.Querion<Telephone>().Where(a => a.Description == " asas").ToList();
+            var kk2 = ses.Querion<Telephone>().Where(a => a.Description == " asas").ToList();
 
             for (int i = 0; i < 5; i++)
             {
@@ -223,14 +238,14 @@ namespace ExampleOrm
             var se6 = ses.Querion<Telephone>().Where(a => a.IdBody > 10).Select(bm => bm.Description.ToUpper()).ToList();
             var eee = ses.Querion<Telephone>().Select(a => a.Description.Trim());
             var ss = ses.Querion<Telephone>().Where(a => a.Datet == null).ToList();
-            var aa = ses.Querion<Telephone>().Select(a => a.Datet.AddDays(3)).ToList();
-            var aa1 = ses.Querion<Telephone>().Select(a => a.Datet.AddYears(3)).ToList();
-            var aa2 = ses.Querion<Telephone>().Select(a => a.Datet.AddMonths(3)).ToList();
+            var aaxv = ses.Querion<Telephone>().Select(a => a.Datet.AddDays(3)).ToList();
+            var aa1xcv = ses.Querion<Telephone>().Select(a => a.Datet.AddYears(3)).ToList();
+            var aa2xcv = ses.Querion<Telephone>().Select(a => a.Datet.AddMonths(3)).ToList();
             var aa3 = ses.Querion<Telephone>().Select(a => a.Datet.AddHours(3)).ToList();
             var aa4 = ses.Querion<Telephone>().Select(a => a.Datet.AddMinutes(3)).ToList();
             var aa5 = ses.Querion<Telephone>().Select(a => a.Datet.AddSeconds(3)).ToList();
             var aa6 = ses.Querion<Telephone>().Select(a => string.Concat(a.Description, "sadas")).ToList();
-            var aa7 = ses.Querion<Telephone>().Select(a => a.Description.Contains("as")).ToList();
+            var aa7 = ses.Querion<Telephone>().Where(a => a.Description.Contains("as")).ToList();
             var aa8 = ses.Querion<Telephone>().Select(a => a.Description.Remove(2)).ToList();
             var aa9 = ses.Querion<Telephone>().Select(a => a.Description.TrimStart()).ToList();
             var ttt = ses.Querion<Telephone>().Select(s => decimal.Add(s.IdBody, 23)).ToList();
