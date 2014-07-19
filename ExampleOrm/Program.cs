@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using ORM_1_21_;
 using ORM_1_21_.Attribute;
+using System.Threading;
 
 namespace ExampleOrm
 {
@@ -15,10 +16,15 @@ namespace ExampleOrm
         {
             new Configure(connectionString: @"Data Source=ION-PC\SQLEXPRESS;Initial Catalog=assa;Integrated Security=True;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False",
                 provider: ProviderName.MsSql,
-                writeLog: true, 
+                writeLog: true,
                 logFileName: "E:/assa22.txt",
                 usageCache: true);
             var ses = Configure.GetSessionCore();
+
+
+           // var eeetrhthth = ses.Querion<Telephone>().ToList();
+
+
             var bodye = new Body { Description = "12" };
             ses.Save(bodye);
             var body2 = new Body { Description = "12" };
@@ -28,13 +34,33 @@ namespace ExampleOrm
             var body122 = new Body();
             ses.Save(body122);
 
-            var dd333 = ses.Querion<Body>().GroupBy(a => a.Description).Count();
+            var ereetrrrerr = ses.Querion<Body>().FirstOrDefault(a => a.Description == "-4");
+
+           
+            var ereetrrrererrr = ses.Querion<Body>().FirstOrDefault(a => a.Description == "-4");
+
+            //var dd333 = ses.Querion<Body>();
+            //foreach (var body in dd333)
+            //{
+            //    Console.WriteLine(body.Id);
+            //}
+            new Thread(() =>
+                       {
+                           var ses1 = Configure.GetSessionCore();
+                           var dwewggfgdfgewed2 = ses1.Querion<Body>().GroupBy(a => a.Description).ToList();
+                       }).Start();
+            var dwewgdfgewed2 = ses.Querion<Body>().GroupBy(a => a.Description).ToList();
+
+            foreach (var body in ses.Querion<Telephone>().Where(a => a.IdTel > 2))
+            {
+                Console.WriteLine(body.IdBody);
+            }
 
             var dewewed1 = ses.Querion<Body>().Where(a => a.Description == null).GroupBy(a => a.Description).ToList();
             var dwewewed2 = ses.Querion<Body>().GroupBy(a => a.Description).ToList();
 
 
-            var aaghdgrerfh = ses.Querion<Body>().Limit(1,1).ToList();
+            var aaghdgrerfh = ses.Querion<Body>().Limit(1, 1).ToList();
 
             var aaghdgfh = ses.Querion<Body>().ElementAtOrDefault(1);
 
@@ -49,12 +75,9 @@ namespace ExampleOrm
             //var e3sas = ses.Querion<Body>().Any(a => a.Description == "123333333");
 
             var eretzxzxeeerrrr =
-                ses.Querion<Body>().Where(s => s.Description == "-23-23").Select(g =>new{ g.Description}).ToList();
-            var ereetrrrerr = ses.Querion<Body>().FirstOrDefault(a => a.Description == "-4");
-
-            var eretzxzxrrrrr = ses.Querion<Body>().FirstOrDefault(a => a.Description == "4");
-            var ereetrrrererrr = ses.Querion<Body>().FirstOrDefault(a => a.Description == "-4");
-            var erezxzxrrrrr = ses.Querion<Body>().LastOrDefault(a=>a.Description=="4");
+                ses.Querion<Body>().Where(s => s.Description == "-23-23").Select(g => new { g.Description }).ToList();
+           
+            var erezxzxrrrrr = ses.Querion<Body>().LastOrDefault(a => a.Description == "4");
             var ererrrrr = ses.Querion<Body>().LastOrDefault(a => a.Description == "-4");
             var r323we = ses.Querion<Body>().ToList().Count();
             var r323 = ses.Querion<Body>().ToList();
@@ -68,9 +91,9 @@ namespace ExampleOrm
 
             var p1 = new ParameterStoredPr("p1", 0, ParameterDirection.Output);
             var p2 = new ParameterStoredPr("p2", 0, ParameterDirection.Output);
-            var sasdwwasd = ses.ProcedureCallParam<object>( "Assa22",p1 ,p2);
-                                                       
-                                                         
+            var sasdwwasd = ses.ProcedureCallParam<object>("Assa22", p1, p2);
+
+
             var sdswawwdas = ses.FreeSql<object>("select description from body");
             var sdsqwwawwdas = ses.FreeSql<Body>("select * from body");
             var sdsawwwdas = ses.FreeSql<object>("select id,description from body");
@@ -95,11 +118,11 @@ namespace ExampleOrm
             var t2ewe7 = ses.Querion<Telephone>().OverCache().OrderBy(w => w.Description).LastOrDefault(s => s.Description != null);
             var twewe28 = ses.Querion<Telephone>().OrderBy(a => a.Description).LastOrDefault(a => a.Description != null);
             var sssssww = ses.GetList<Table1>().FirstOrDefault();
-         //  sssssww.Description = "dddddddd2222222222";
+            //  sssssww.Description = "dddddddd2222222222";
             //using (var d = new TransactionScope())
             //{
-               // ses.Save(sssssww);
-                //  d.Complete();
+            // ses.Save(sssssww);
+            //  d.Complete();
             //}
 
 
@@ -137,7 +160,7 @@ namespace ExampleOrm
             ses.Save(tel);
 
             var t21 = ses.Querion<Body>().ToList();
-            ses.Delete(t21[0]);
+            //ses.Delete(t21[0]);
 
             var t22 = ses.Querion<Body>().OverCache().ToList();
             var t23 = ses.Querion<Body>().DistinctCore(a => a.Description).ToList();
@@ -162,7 +185,7 @@ namespace ExampleOrm
             var t30 = ses.Querion<Telephone>().OrderByDescending(a => a.Description).ToList();//.First(d => d.Description == null);
             var t31 = ses.Querion<Telephone>().LastOrDefault(d => d.Description == null);
             var t33 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == "sadsadsa");
-        //    var t34 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == "sadsadsa");
+            //    var t34 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == "sadsadsa");
             var t35 = ses.Querion<Telephone>().All(a => a.Description != null || a.Description == null);
             var t36 = ses.Querion<Telephone>().All(a => a.Description == "dsaas");
             var t37 = ses.Querion<Telephone>().All(a => a.Id < 60000000);
@@ -186,8 +209,8 @@ namespace ExampleOrm
 
             var t48 = ses.Querion<Telephone>().Where(a => a.Description != null).Min(a => a.Id);
             var t49 = ses.Querion<Telephone>().Where(s => s.Description == "ttttttttt").DistinctCore(a => a.Description);
-           // var t50 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == null);
-          //  var t51 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description.Length == 10000);
+            // var t50 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == null);
+            //  var t51 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description.Length == 10000);
             var t52 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description == null);
             var t53 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description.Length == 10000);
             Func<Telephone, int> ddxx = telephone => (int)(telephone.IdTel * 100);
@@ -275,7 +298,7 @@ namespace ExampleOrm
             var ttt13 = ses.Querion<Telephone>().Select(s => Math.Atan2((double)s.IdBody, 34)).ToList();
             var ttt14 = ses.Querion<Telephone>().Select(s => Math.Cos((double)s.IdBody)).ToList();
             var ttt15 = ses.Querion<Telephone>().Select(s => Math.Exp(12) * (double)s.IdTel).ToList();
-          //  var ttt9wt3 = ses.Querion<Telephone>().Select(s => Math.Log10((double)s.IdBody)).ToList();
+            //  var ttt9wt3 = ses.Querion<Telephone>().Select(s => Math.Log10((double)s.IdBody)).ToList();
             var ttt92 = ses.Querion<Telephone>().Select(s => Math.Sign(s.IdBody)).ToList();
             var ttt93 = ses.Querion<Telephone>().Select(s => Math.Tan((double)s.IdBody)).ToList();
             var ttt49 = ses.Querion<Telephone>().Select(s => Math.Sqrt((double)s.IdBody)).ToList();

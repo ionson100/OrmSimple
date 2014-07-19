@@ -254,6 +254,39 @@
             <param name="nex"></param>
             <returns></returns>
         </member>
+        <member name="M:ORM_1_21_.QueryResultCache.GetCacheKey(System.Linq.Expressions.Expression)">
+            <summary>
+            Gets a cache key for a query.
+            </summary>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:ORM_1_21_.Evaluator.PartialEval(System.Linq.Expressions.Expression,System.Func{System.Linq.Expressions.Expression,System.Boolean})" -->
+        <!-- Badly formed XML comment ignored for member "M:ORM_1_21_.Evaluator.PartialEval(System.Linq.Expressions.Expression)" -->
+        <!-- Badly formed XML comment ignored for member "T:ORM_1_21_.Evaluator.SubtreeEvaluator" -->
+        <member name="T:ORM_1_21_.Evaluator.Nominator">
+            <summary>
+            Performs bottom-up analysis to determine which nodes can possibly
+            be part of an evaluated sub-tree.
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.LocalCollectionExpander">
+            <summary>
+            Enables cache key support for local collection values.
+            </summary>
+        </member>
+        <member name="T:ORM_1_21_.LocalCollectionExpander.Printer`1">
+            <summary>
+            Overrides ToString to print each element of a collection.
+            </summary>
+            <remarks>
+            Inherits List in order to support List.Contains instance method as well
+            as standard Enumerable.Contains/Any extension methods.
+            </remarks>
+        </member>
+        <member name="M:ORM_1_21_.Utility.ToMd5Fingerprint(System.String)">
+            <summary>
+            Creates an MD5 fingerprint of the string.
+            </summary>
+        </member>
         <member name="T:ORM_1_21_.Parameter">
             <summary>
             Еденица параметра, для запроса с параметрами

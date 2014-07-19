@@ -44,16 +44,23 @@ namespace ExampleOrmMySql
             //var ll = list.Where(myExpression.Compile()).First().Description;
 
             ISession ses = Configure.GetSessionCore();
+            var sdswawwdas = ses.FreeSql<object>("select description from body");
+
+
+            var ttttttt = ses.Querion<Body>().OverCache().ToList();
             foreach (var VARIABLE in ses.Querion<Body>())
             {
                 ses.Delete(VARIABLE);
             }
 
-            for (var i = 0; i < 50; i++)
+            for (var i = 0; i < 5; i++)
             {
                 var b = new Body { Description = "dsdsdf" };
                 ses.Save(b);
             }
+
+
+            var dd1sdewm = ses.Querion<Body>().Where(a => a.Description != null).GroupBy(a => a.Description).ToList();
 
             var dffdfdd = ses.Querion<Body>().Where(a => a.Description == "12").SingleOrDefault();
             var drererrr = ses.Querion<Body>().First(a => a.Description != null);//разогрев
@@ -98,7 +105,7 @@ namespace ExampleOrmMySql
 
             var dd1gj = ses.Querion<Body>().Where(a => a.Description != null).GroupByCore(a => a.Description).ToList();
 
-            var dd1sdewm = ses.Querion<Body>().Where(a => a.Description != null).GroupBy(a => a.Description).ToList();
+          
             var dd1ewm =
                 ses.Querion<Body>().Where(a => a.Description != null).Select(d => new { d.Description, d.Id }).ToList();
 
@@ -150,16 +157,16 @@ namespace ExampleOrmMySql
             var sddwswwwawwdas = ses.FreeSqlParam<string>("select description from body where id >?p1", new Parameter("p1", 0)).Distinct();
             var sdsqwwwawwdas = ses.FreeSqlParam<Body>("select id,description from body where id >?p1", new Parameter("p1", 0));
             var sdsawwwwdas = ses.FreeSqlParam<dynamic>("select id,description from body where id >?p1", new Parameter("p1", 0));
-            var sdswadas = ses.FreeSqlParam<Test1>("select id,description from body where id >?p1", new Parameter("p1", 0));
+          //  var sdswadas = ses.FreeSqlParam<Test1>("select id,description from body where id >?p1", new Parameter("p1", 0));
             var sasdasd = ses.ProcedureCall<Body>("Assa1;");
             //Dictionary<string, object> ddss;
             //var sasdwwasd = ses.ProcedureCallParam<object>(out ddss, "ion100",
             //                                             new ParameterStoredPr("p1", 0, ParameterDirection.Input, null),
             //                                             new ParameterStoredPr("p2", 3, ParameterDirection.InputOutput, "sdasd"));
-            var sdswawwdas = ses.FreeSql<object>("select description from body");
+          
             var sdsqwwawwdas = ses.FreeSql<Body>("select id,description from body");
             var sdsawwwdas = ses.FreeSql<object>("select id,description from body");
-            var sdsadas = ses.FreeSql<Test1>("select id,description from body");
+           // var sdsadas = ses.FreeSql<Test1>("select id,description from body");
 
 
 
