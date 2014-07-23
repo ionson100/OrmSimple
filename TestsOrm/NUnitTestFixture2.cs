@@ -153,29 +153,7 @@ namespace TestsOrm
             Assert.True(dd1 != null && dd2 == null && dd3 != null);
         }
 
-        [Test]
-        public void TestGroupByCore()
-        {
-            var ses = Configure.GetSessionCore();
-            PrintFirstGround(ses, "TestGroupByCore");
-            Clear(ses);
-            var body = new Body { Description = "12" };
-            ses.Save(body);
-            var body2 = new Body { Description = "12" };
-            ses.Save(body2);
-            var body12 = new Body { Description = "13" };
-            ses.Save(body12);
-
-            var body121 = new Body();
-            ses.Save(body121);
-            var dd1 = ses.Querion<Body>().Where(a => a.Description == null).GroupByCore(a => a.Description).ToList();
-            var dd2 = ses.Querion<Body>().GroupByCore(a => a.Description).ToList();
-            // var dd3 = ses.Querion<Body>().GroupByCore(a=>a.Id).ToList();
-            Clear(ses);
-            PrintSecondGround(ses, "TestGroupByCore");
-            ses.Dispose();
-            Assert.True(dd1.Count == 1 && dd2.Count == 3);
-        }
+       
 
         [Test]
         public void TestSimpleSelect()
@@ -383,6 +361,39 @@ namespace TestsOrm
             PrintSecondGround(ses, "TestContains");
             ses.Dispose();
             Assert.True(aa);
+        }
+
+
+        [Test]
+        public void TestFeeSql()
+        {
+            var ses = Configure.GetSessionCore();
+            PrintFirstGround(ses, "TestFeeSql");
+            Clear(ses);
+         
+            ses.Save(new Body { Description = "12" });
+      
+            ses.Save(new Body { Description = "12" });
+          
+            ses.Save(new Body { Description = "131" });
+         
+            ses.Save(new Body());
+
+
+            var aa = ses.FreeSql<Body>("select id as Id,description as Description from body ");
+
+            var aa1 = ses.FreeSql<int>("select id  from body ");
+
+            var aa2 = ses.FreeSql<object>("select id ,description from body ");
+
+            var aa3 = ses.FreeSql<object>("select id ,description from body ");
+
+            var aa4 = ses.FreeSqlParam<Body>("select id as Id,description as Description from body where description = @1", new Parameter("@1", 12));
+          
+            Clear(ses);
+            PrintSecondGround(ses, "TestFeeSql");
+            ses.Dispose();
+            Assert.True(aa.Count() == 4 && aa1.Count() == 4 && aa2.Count() == 4 && aa3.Count() == 4 && aa4.Count() == 2);
         }
 
 

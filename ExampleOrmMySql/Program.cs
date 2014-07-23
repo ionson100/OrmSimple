@@ -9,6 +9,10 @@ using ORM_1_21_.Attribute;
 
 namespace ExampleOrmMySql
 {
+    class MyClass
+    {
+         public string description { get; set; }
+    }
     class Test1
     {
         private readonly long _id;
@@ -44,10 +48,16 @@ namespace ExampleOrmMySql
             //var ll = list.Where(myExpression.Compile()).First().Description;
 
             ISession ses = Configure.GetSessionCore();
-            var sdswawwdas = ses.FreeSql<object>("select description from body");
+           
 
+            for (var i = 0; i < 5; i++)
+            {
+                var b = new Body { Description = "dsdsdf" };
+                ses.Save(b);
+            }
+            var sdswawwdas = ses.FreeSql<int?>("select image from testimage");
 
-            var ttttttt = ses.Querion<Body>().OverCache().ToList();
+         //   var ttttttt = ses.Querion<Body>().Select(d=>new {d.Id, d.Description}).GroupBy(a=>a.Description).ToList();
             foreach (var VARIABLE in ses.Querion<Body>())
             {
                 ses.Delete(VARIABLE);
@@ -103,7 +113,7 @@ namespace ExampleOrmMySql
 
 
 
-            var dd1gj = ses.Querion<Body>().Where(a => a.Description != null).GroupByCore(a => a.Description).ToList();
+           
 
           
             var dd1ewm =
@@ -217,16 +227,14 @@ namespace ExampleOrmMySql
 
             //.ForEach(a=>ses.Querion<Telephone>().Delete(a));
 
-            var eesweq =
-               ses.Querion<Telephone>().Where(a => a.Description != null).OrderBy(q => q.Description).GroupByCore(a => a.Name).ToList();
+           
 
             var eewewe =
                 ses.Querion<Telephone>().Where(a => a.Description != null).OrderBy(q => q.Description).GroupByCore(a => a.Name != null).ToList();
-            var eewwqwewe =
-               ses.Querion<Telephone>().Where(a => a.Description != null).GroupByCore(a => a.Name).Select(a => new { a.Name }).ToList();
+       
             var eewwqwaSewe =
                ses.Querion<Telephone>().OverCache().Where(a => a.Description != null).GroupByCore(a => a.Name, a => a.Description).ToList();
-            var sdwqwfdfwwsd = ses.Querion<Telephone>().Where(a => a.Description != null).GroupByCore(a => a.Name).ToList();
+      
             var sdsd = ses.Querion<Telephone>().FirstOrDefault(a => a.Id < 0);
             var sdwsd = ses.Querion<Telephone>().FirstOrDefault(a => a.Id < 0);
             var sqwfdsd = ses.Querion<Telephone>().LastOrDefault(a => a.Id < 0);
@@ -340,7 +348,7 @@ namespace ExampleOrmMySql
             // var t51 = ses.Querion<Telephone>().SingleOrDefault(a => a.Description.Length == 10000);
             // var t52 = ses.Querion<Telephone>().Single(a => a.Description == null);
             // var t53 = ses.Querion<Telephone>().Single(a => a.Description.Length == 10000);
-            var t54 = ses.Querion<Telephone>().Where(a => a.Description != null).GroupByCore(a => a.Description).ToList();
+           
             var t55 = ses.FreeSql<Body>("select * from body");
             var t56 = ses.FreeSql<object>("select * from telephones");
 
@@ -458,6 +466,17 @@ namespace ExampleOrmMySql
 
             ses.Dispose();
         }
+    }
+    [MapTableName("`testimage`")]
+    class TestImage
+    {
+        [MapPrimaryKey("`id`", Generator.Native)]
+        public int Id { get; set; }
+
+
+
+        [MapColumnName("`image`")]
+        public byte[] Image { get; set; }
     }
     [MapTableName("body", "body.id > 0")]
     public class Body
