@@ -153,7 +153,7 @@ namespace TestsOrm
             Assert.True(dd1 != null && dd2 == null && dd3 != null);
         }
 
-       
+
 
         [Test]
         public void TestSimpleSelect()
@@ -311,13 +311,13 @@ namespace TestsOrm
             ses.Save(body121);
 
             var aa = ses.Querion<Body>().All(a => a.Description != null);
-            var bb = ses.Querion<Body>().Where(c=>c.Description== null).All(a => a.Description == "12");
-          
-           
+            var bb = ses.Querion<Body>().Where(c => c.Description == null).All(a => a.Description == "12");
+
+
             Clear(ses);
             PrintSecondGround(ses, "TestAll");
             ses.Dispose();
-            Assert.True(aa&&!bb);
+            Assert.True(aa && !bb);
         }
 
         [Test]
@@ -340,7 +340,7 @@ namespace TestsOrm
             Clear(ses);
             PrintSecondGround(ses, "TestLIKE");
             ses.Dispose();
-            Assert.True(aa==3 && aa1==2&&aa2==1);
+            Assert.True(aa == 3 && aa1 == 2 && aa2 == 1);
         }
         [Test]
         public void TestContains()
@@ -365,20 +365,21 @@ namespace TestsOrm
 
 
         [Test]
-        public void TestFeeSql()
+        public void TestFeeSql()//! не кушируются не в первом не во втором
         {
             var ses = Configure.GetSessionCore();
             PrintFirstGround(ses, "TestFeeSql");
             Clear(ses);
-         
+
             ses.Save(new Body { Description = "12" });
-      
+
             ses.Save(new Body { Description = "12" });
-          
+
             ses.Save(new Body { Description = "131" });
-         
+
             ses.Save(new Body());
 
+            var aa5 = ses.FreeSql<NewBody>("select id as Id,description as Description from body ");
 
             var aa = ses.FreeSql<Body>("select id as Id,description as Description from body ");
 
@@ -389,11 +390,24 @@ namespace TestsOrm
             var aa3 = ses.FreeSql<object>("select id ,description from body ");
 
             var aa4 = ses.FreeSqlParam<Body>("select id as Id,description as Description from body where description = @1", new Parameter("@1", 12));
-          
+
+            var aa6 = GetTestEnumerable(new {Id = 3, Description = ""}, ses);
+
             Clear(ses);
             PrintSecondGround(ses, "TestFeeSql");
             ses.Dispose();
-            Assert.True(aa.Count() == 4 && aa1.Count() == 4 && aa2.Count() == 4 && aa3.Count() == 4 && aa4.Count() == 2);
+            Assert.True(aa.Count() == 4 && aa1.Count() == 4 && aa2.Count() == 4 && aa3.Count() == 4 && aa4.Count() == 2 && aa5.Count() == 4&&aa6.Count()==4);
+        }
+
+        class NewBody
+        {
+            public int Id { get; set; }
+            public string Description { get; set; }
+        }
+
+        IEnumerable<T> GetTestEnumerable<T>(T t, ISession ses)
+        {
+            return ses.FreeSql<T>("select id as Id,description as Description from body");
         }
 
 
