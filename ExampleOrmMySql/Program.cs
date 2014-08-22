@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Transactions;
 using ORM_1_21_;
@@ -37,7 +38,20 @@ namespace ExampleOrmMySql
     {
         static void Main()
         {
-            //var myExpression = System.Linq.Dynamic.DynamicExpression.ParseLambda<Body, bool>("Description = @0", "12");
+            //var body = 
+            
+            var myExpression = System.Linq.Dynamic.DynamicExpression.ParseLambda<Body, bool>("id > @0 and id <@1", 10,2000000);
+            var myExpression2 = System.Linq.Dynamic.DynamicExpression.ParseLambda<Body, bool>("id > @0 and id <@1", 10, 2000000);
+
+            var and = Expression.AndAlso(myExpression.Body, myExpression2.Body);
+
+			var param = Expression.Parameter(typeof(Body));
+
+			var rrr= Expression.Lambda<Func<Body, bool>>(and, param);
+            //var param = Expression.Parameter(typeof(TEntity));
+
+            //return Expression.Lambda<Func<Body, bool>>(and, param);;
+            //var rrr = Expression.AndAlso(myExpression.Body, myExpression2.Body);
             //var myExpression1 = System.Linq.Dynamic.DynamicExpression.ParseLambda<Body, bool>("Description = @0 || Description =@1 ", "13", "12");
             //ORM_1_21_.Utils.
             new Configure("Server=localhost;Database=test;Uid=root;Pwd=;charset=utf8;Allow User Variables=True;", ProviderName.MySql, true, "E:/assa22.txt", true);
@@ -55,6 +69,8 @@ namespace ExampleOrmMySql
                 var b = new Body { Description = "dsdsdf" };
                 ses.Save(b);
             }
+
+            var ttyutyt = ses.Querion<Body>().Where(rrr).ToList();
             var sdswawwdas = ses.FreeSql<int?>("select image from testimage");
 
          //   var ttttttt = ses.Querion<Body>().Select(d=>new {d.Id, d.Description}).GroupBy(a=>a.Description).ToList();
